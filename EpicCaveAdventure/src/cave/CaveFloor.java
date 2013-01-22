@@ -5,6 +5,7 @@
 package cave;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import moveable.Monster;
@@ -17,11 +18,13 @@ public class CaveFloor {
     
     private int width;
     private int height;
-    private List<Monster> monsters;    
+    private List<Monster> monsters;  
+    private HashMap<String, int[]> moveableStats;
     
-    public CaveFloor(int width, int height) {
+    public CaveFloor(int width, int height, HashMap<String, int[]> stats) {
         this.width = width;
         this.height = height;
+        this.moveableStats = stats;
         this.monsters = new ArrayList<>();
         createMonsters();
     }
@@ -51,7 +54,7 @@ public class CaveFloor {
     private void createMonsters() {
         Random randomizer = new Random();        
         
-        for(int i = 0; i < 5; ++i) {
+        for(int i = 0; i < 10; ++i) {
             int x = randomizer.nextInt(this.width);
             int y = randomizer.nextInt(this.height);
             boolean placeTaken = false;
@@ -65,6 +68,7 @@ public class CaveFloor {
             }
             
             if(!placeTaken) {
+                int monsterType = randomizer.nextInt(this.moveableStats.size()-2) + 1;
                 this.monsters.add(new Monster("Hirviö", x, y));
             }
         }

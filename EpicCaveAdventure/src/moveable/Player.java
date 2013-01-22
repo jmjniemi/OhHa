@@ -19,6 +19,10 @@ public class Player extends Moveable {
         this.healCount = 0;
     }
     
+    public String getPlayerName() {
+        return this.playerName;
+    }    
+    
     @Override
     public void move(int direction) {
         super.move(direction);
@@ -33,7 +37,7 @@ public class Player extends Moveable {
     
     @Override
     public String toString() {
-        return playerName + " (" + super.getAppearance() + ")\n" + super.getHP() + "/15 HP";
+        return playerName + super.toString();
     }
     
 }

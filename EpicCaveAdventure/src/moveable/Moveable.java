@@ -4,6 +4,8 @@
  */
 package moveable;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Jaakko
@@ -14,6 +16,7 @@ public class Moveable {
     private int x;
     private int y;    
     private int hp;
+    private int maxHP;
     private int damage;
     private char appearance;
     
@@ -35,6 +38,7 @@ public class Moveable {
         this.x = x;
         this.y = y;        
         this.hp = characterHP(name);
+        this.maxHP = this.hp;
         this.damage = characterDamage(name);
         this.appearance = characterAppearance(name);
     }
@@ -80,7 +84,7 @@ public class Moveable {
     }
     
     public void heal() {
-        if(this.hp < 15) {
+        if(this.hp < this.maxHP) {
             this.hp++;
         }
     }
@@ -106,19 +110,19 @@ public class Moveable {
     }
     
     private char characterAppearance(String type) {
-        String symbols = "h@";
+        String symbols = "@h";
         switch (type) {
             case "Hirviö":
-                return symbols.charAt(0);
-            case "Player":
                 return symbols.charAt(1);
+            case "Player":
+                return symbols.charAt(0);
         }
         return "-".charAt(0);
     }
     
     @Override
     public String toString() {
-        return name + " (" + appearance + ")\n" + hp + " HP x:" + this.x + " y:" + this.y;
+        return " (" + appearance + ")\n" + hp + "/" + maxHP + " HP x:" + this.x + " y:" + this.y;
     }
     
 }

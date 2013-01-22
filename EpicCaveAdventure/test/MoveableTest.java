@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import moveable.Monster;
 import moveable.Moveable;
 import moveable.Player;
 import org.junit.After;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
  */
 public class MoveableTest {
     
-    Moveable eki;
+    Monster eki;
     
     public MoveableTest() {
     }
@@ -33,7 +34,7 @@ public class MoveableTest {
     
     @Before
     public void setUp() {
-        eki = new Moveable("Hirviö", 1, 1);
+        eki = new Monster("Hirviö", 1, 1);
     }
     
     @After
@@ -48,7 +49,7 @@ public class MoveableTest {
     public void constructorWorks() {         
         String status = eki.toString();
         
-        assertEquals("Hirviö (h)\n5 HP", status);
+        assertEquals("Hirviö (h)\n5/5 HP x:1 y:1", status);
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -88,8 +89,7 @@ public class MoveableTest {
     }
     
     @Test
-    public void moveWorks() {
-        eki = new Moveable("Hirviö", 1, 1);        
+    public void moveWorks() {            
                 
         eki.move(0);
         

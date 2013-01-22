@@ -28,4 +28,9 @@ public class Monster extends Moveable {
         return this.scorePoints;
     }
     
+    @Override
+    public String toString() {
+        return super.getName() + super.toString();
+    }
+    
 }
