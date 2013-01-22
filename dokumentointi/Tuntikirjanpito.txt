@@ -11,3 +11,4 @@ Koodia ja JUnit-testejä: 2h
 Tiistai 22.01.2013
 
 Koodia: 2h
+Luokkakaavio ja JUnit testejä: 1h 30min
