@@ -22,6 +22,11 @@ public class CaveFloor {
     private HashMap<String, int[]> moveableStats;
     
     public CaveFloor(int width, int height, HashMap<String, int[]> stats) {
+        
+        if((width * height < 10) || width < 1 || height < 1) {
+            throw new IllegalArgumentException("Floor too small");
+        }
+        
         this.width = width;
         this.height = height;
         this.moveableStats = stats;
@@ -67,8 +72,7 @@ public class CaveFloor {
                 }
             }
             
-            if(!placeTaken) {
-                int monsterType = randomizer.nextInt(this.moveableStats.size()-2) + 1;
+            if(!placeTaken) {                
                 this.monsters.add(new Monster("Hirviö", x, y));
             }
         }
@@ -77,7 +81,7 @@ public class CaveFloor {
     public void listMonsters() {
         for(Monster m : this.monsters) {
             System.out.println(m);
-        }
+        }        
     }
     
 }
