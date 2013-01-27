@@ -12,3 +12,6 @@ Tiistai 22.01.2013
 
 Koodia: 2h
 Luokkakaavio ja JUnit testejä: 1h 30min
+
+Sunnuntai 27.01.2013
+Koodia 3h
