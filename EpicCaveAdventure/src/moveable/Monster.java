@@ -4,6 +4,8 @@
  */
 package moveable;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Jaakko
@@ -12,16 +14,9 @@ public class Monster extends Moveable {
     
     private int scorePoints;
     
-    public Monster(String name, int x, int y) {        
-        super(name, x, y);
-        this.scorePoints = monsterScorePoints(name);
-    }
-    
-    private int monsterScorePoints(String type) {
-        if(type.equals("Hirviö")) {
-            return 5;
-        }
-        throw new IllegalArgumentException("No such monster");
+    public Monster(String name, int x, int y, HashMap<String, int[]> stats) {        
+        super(name, x, y, stats);
+        this.scorePoints = stats.get(name)[0];
     }
     
     public int getScorePoints() {

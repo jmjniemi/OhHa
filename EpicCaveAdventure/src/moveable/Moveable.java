@@ -5,6 +5,7 @@
 package moveable;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -20,27 +21,24 @@ public class Moveable {
     private int damage;
     private char appearance;
     
-    private static final String[] NAMES = new String[]{
-        "Player", "Hirviö"};
-    
-    public Moveable(String name, int x, int y) {
-        boolean exists = false;
-        for(int i = 0; i < NAMES.length; ++i) {
-            if(NAMES[i].equals(name)) {
-                exists = true;
-            }
-        }
-        if(!exists) {
+    public Moveable(String name, int x, int y, HashMap<String, int[]> stats) {
+        
+        if(!stats.containsKey(name)) {
             throw new IllegalArgumentException("No such monster");
         }
         
         this.name = name;
         this.x = x;
         this.y = y;        
-        this.hp = characterHP(name);
+        this.hp = stats.get(name)[0];
         this.maxHP = this.hp;
-        this.damage = characterDamage(name);
-        this.appearance = characterAppearance(name);
+        this.damage = stats.get(name)[1];
+        
+        if(name.equals("Player")) {
+            this.appearance = "@".charAt(0);
+        } else {
+            this.appearance = Character.toLowerCase(name.charAt(0));
+        }
     }
     
     public int getX() {
@@ -87,37 +85,6 @@ public class Moveable {
         if(this.hp < this.maxHP) {
             this.hp++;
         }
-    }
-    
-    private int characterHP(String type) {
-        switch (type) {
-            case "Hirviö":
-                return 5;
-            case "Player":
-                return 15;
-        }
-        return -1;
-    }
-    
-    private int characterDamage(String type) {
-        switch (type) {
-            case "Hirviö":
-                return 2;
-            case "Player":
-                return 3;
-        }
-        return -1;
-    }
-    
-    private char characterAppearance(String type) {
-        String symbols = "@h";
-        switch (type) {
-            case "Hirviö":
-                return symbols.charAt(1);
-            case "Player":
-                return symbols.charAt(0);
-        }
-        return "-".charAt(0);
     }
     
     @Override

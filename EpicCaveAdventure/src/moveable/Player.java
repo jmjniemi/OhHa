@@ -4,6 +4,8 @@
  */
 package moveable;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Jaakko
@@ -13,8 +15,8 @@ public class Player extends Moveable {
     private String playerName;
     private int healCount;
     
-    public Player(String name, int x, int y) {
-        super("Player", x, y);
+    public Player(String name, int x, int y, HashMap<String, int[]> stats) {
+        super("Player", x, y, stats);
         this.playerName = name;
         this.healCount = 0;
     }
