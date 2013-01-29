@@ -45,6 +45,14 @@ public class CaveFloor {
         createMonsters();
     }
     
+    public List<Monster> getMonsters() {
+        return this.monsters;
+    }
+    
+    public Player getPlayer() {
+        return this.player;
+    }
+    
     public void drawFloor() {
         for(int i = 0; i < this.height; ++i) {
             drawRow(i);
@@ -123,6 +131,46 @@ public class CaveFloor {
         } else if(d.equals("d")) {
             this.player.move(1);
         }
+    }
+    
+    public void moveMonsters() {
+        int oldX;
+        int oldY;
+        int dir;
+        
+        for(Monster m : this.monsters) {
+            oldX = m.getX();
+            oldY = m.getY();
+            dir = randomizer.nextInt(4);
+            
+            m.move(dir);
+            
+            if(!freePlace(m.getX(), m.getY())) {
+                m.setXY(oldX, oldY);
+            }
+        }
+    }
+    
+    private boolean freePlace(int x, int y) {
+        int monCheck = 0;
+        if(x == this.width || x == -1 || y == this.height || y == -1) {
+            return false;
+        }
+        if(x == this.player.getX() && y == this.player.getY()) {
+            return false;
+        }
+        if(x == stairs[0] && y == stairs[1]) {
+            return false;
+        }
+        for(Monster m : this.monsters) {
+            if(x == m.getX() && y == m.getY()) {
+                monCheck++;
+            }
+        }
+        if(monCheck == 2) {
+            return false;
+        }
+        return true;
     }
     
     

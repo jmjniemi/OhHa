@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import moveable.Monster;
 import moveable.Moveable;
 import moveable.Player;
@@ -20,6 +22,8 @@ import static org.junit.Assert.*;
 public class MoveableTest {
     
     Monster eki;
+    HashMap<String, int[]> moveableStats;
+    ArrayList<String> monsterNames;
     
     public MoveableTest() {
     }
@@ -34,7 +38,19 @@ public class MoveableTest {
     
     @Before
     public void setUp() {
-        eki = new Monster("Hirviö", 1, 1);
+        moveableStats = new HashMap<>();
+        moveableStats.put("Player", new int[]{15,3});
+        moveableStats.put("Hirviö", new int[]{5,2});
+        moveableStats.put("Goblin", new int[]{2,1});
+        moveableStats.put("Orc", new int[]{6,3});
+        moveableStats.put("Troll", new int[]{10,5});
+        
+        monsterNames = new ArrayList<>();
+        monsterNames.add("Goblin");
+        monsterNames.add("Orc");  
+        monsterNames.add("Troll");
+        
+        eki = new Monster("Hirviö", 1, 1, moveableStats);
     }
     
     @After
@@ -54,7 +70,7 @@ public class MoveableTest {
     
     @Test(expected=IllegalArgumentException.class)
     public void BadNames() {
-        Moveable hane = new Moveable("Hane", 1, 1);        
+        Moveable hane = new Moveable("Hane", 1, 1, moveableStats);        
     }
     
     @Test
@@ -71,7 +87,7 @@ public class MoveableTest {
     
     @Test
     public void healWorks() {
-        Player pena = new Player("Pena", 1, 1);
+        Player pena = new Player("Pena", 1, 1, moveableStats);
         
         pena.takeDamage(2);
         

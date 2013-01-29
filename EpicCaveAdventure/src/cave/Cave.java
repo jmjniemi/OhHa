@@ -28,21 +28,31 @@ public class Cave {
     }
     
     public void run() {
+        menu();
+        
         while(true) {
             this.currentFloor.drawFloor();
+            
+            String playerDirection = scanner.next();   
+            
+            if(playerDirection.equals("exit")) {
+                break;
+            }
         
-            turn();
+            turn(playerDirection);
         }
     }
     
-    public void turn() {
-        String playerDirection = scanner.next();        
+    private void menu() {
+        System.out.println("Welcome to play Epic Cave Adventure!");
+        System.out.println("Move with wasd, type \"exit\" to quit.");
+        System.out.println("Find your way out, good luck!\n");
+    }
+    
+    private void turn(String dir) {
+            this.currentFloor.movePlayer(dir);
         
-        if(playerDirection.equals("w") || playerDirection.equals("a") || playerDirection.equals("s") || playerDirection.equals("d")) {
-            this.currentFloor.movePlayer(playerDirection);
-        }
-        
-        
+        currentFloor.moveMonsters();        
     }
     
 }
