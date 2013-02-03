@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import moveable.Player;
 
 /**
  *
@@ -21,10 +22,15 @@ public class Cave {
     private CaveFloor currentFloor;
     private Map<String, int[]> stats;
     private List<String> monsterNames;
+    private Player player;
     
     public Cave(HashMap<String, int[]> stats, ArrayList<String> monsterNames) {
         this.scanner = new Scanner(System.in);
         this.currentFloor = new CaveFloor(20, 10, stats, monsterNames);
+    }
+    
+    public Player getPlayer() {
+        return this.player;
     }
     
     public void run() {
@@ -50,7 +56,7 @@ public class Cave {
     }
     
     private void turn(String dir) {
-            this.currentFloor.movePlayer(dir);
+//        this.currentFloor.movePlayer(dir);
         
         currentFloor.moveMonsters();        
     }

@@ -9,6 +9,7 @@ import cave.CaveFloor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import moveable.*;
+import ui.UI;
 
 public class EpicCaveAdventure {
 
@@ -26,11 +27,15 @@ public class EpicCaveAdventure {
         ArrayList<String> monsterNames = new ArrayList<>();
         monsterNames.add("Goblin");
         monsterNames.add("Orc");  
-        monsterNames.add("Troll");        
+        monsterNames.add("Troll");  
         
-        Cave pitti = new Cave(moveableStats, monsterNames);
+        UI ui = new UI(moveableStats, monsterNames);
         
-        pitti.run();
+        ui.run();
+        
+//        Cave pitti = new Cave(moveableStats, monsterNames);
+//        
+//        pitti.run();
         
     }
 }

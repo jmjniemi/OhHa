@@ -4,6 +4,7 @@
  */
 package moveable;
 
+import epiccaveadventure.Direction;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,14 +67,14 @@ public class Moveable {
         return this.appearance;
     }
     
-    public void move(int direction) {
-        if (direction == 0) {
+    public void move(Direction dir) {
+        if (dir == Direction.UP) {
             this.y--;
-        } else if (direction == 1) {
+        } else if (dir == Direction.RIGHT) {
             this.x++;
-        } else if (direction == 2) {
+        } else if (dir == Direction.DOWN) {
             this.y++;
-        } else if (direction == 3) {
+        } else if (dir == Direction.LEFT) {
             this.x--;
         }
     }

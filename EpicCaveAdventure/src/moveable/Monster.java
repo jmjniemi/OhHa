@@ -4,6 +4,7 @@
  */
 package moveable;
 
+import epiccaveadventure.Direction;
 import java.util.HashMap;
 
 /**

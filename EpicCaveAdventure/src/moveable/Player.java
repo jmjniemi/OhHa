@@ -4,6 +4,7 @@
  */
 package moveable;
 
+import epiccaveadventure.Direction;
 import java.util.HashMap;
 
 /**
@@ -26,8 +27,8 @@ public class Player extends Moveable {
     }    
     
     @Override
-    public void move(int direction) {
-        super.move(direction);
+    public void move(Direction dir) {
+        super.move(dir);
         
         this.healCount++;
         
