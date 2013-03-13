@@ -9,4 +9,4 @@ Mahdollisia lisäominaisuuksia:
 -Hiiren vasenta nappia klikkaamalla paljastamaton ruutu merkitään miinaksi
 -Miinalaskuri kertoo jäljellä olevien miinojen määrän
 -Klikkaamalla paljastettua ruutua kaikki ympärillä olevat ruudut paljastetaan, paitsi miinat
--Upeat grafiikat
+-Upeat grafiikat - tietysti itsetehtyinä
