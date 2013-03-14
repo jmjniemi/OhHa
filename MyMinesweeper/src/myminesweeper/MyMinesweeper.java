@@ -16,7 +16,7 @@ public class MyMinesweeper {
     public static void main(String[] args) {
         Board b = new Board();
         
-        b.newGame();
+        b.createField();
         
         b.drawMinefield();
     }

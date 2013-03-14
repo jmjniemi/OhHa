@@ -7,7 +7,7 @@ package myminesweeper;
 import java.util.Random;
 
 public class Board {
-    
+
     //ruudut ovat numeroarvoja, mutta selkeyden vuoksi käytetään nimettyjä muuttujia
     private final int EMPTY = 0;
     private final int MINE = 9;
@@ -16,133 +16,88 @@ public class Board {
     private final int COVERED_MINE = 19; //MINE + COVERED
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
-    private final int DRAW_MINE = 9;
-    private final int DRAW_COVER = 10;
-    private final int DRAW_MARK = 11;
-    private final int DRAW_WRONG = 12;
-    
-    private int[] minefield;
-    private boolean inGame;
-    private int minesLeft;
-    private int mines = 99;
-    private int height = 16;
-    private int width = 30;
-    private int squares;
-    
+    private int[][] minefield; //miinakenttä 2-ulotteinen taulukko
+    private int mines = 99;  //
+    private int height = 16; //defaul-arvot, näillä pelaamalla lasketaan pisteet
+    private int width = 30;  //
+    private int minesLeft;    
+    private boolean countScore;
+
     public Board() {
-        
+        this.countScore = true;
     }
-    
-    public void newGame() {
-        
-        Random random = new Random();        
-        inGame = true;
-        minesLeft = mines;        
-        squares = height * width;
-        minefield = new int[squares];
-        
-//        for (int i = 0; i < squares; i++) {
-//            minefield[i] = COVERED;
-//        }
-        
-        int usedMines = 0;
-        int position = 0;
-        int currentColumn;
-        int square = 0;
-        
-        while (usedMines < mines) { //sijoitetaan miinat
-            
-            position = (int) (squares * random.nextDouble()); //valitaan satunnainen paikka miinalle
-            
-            if ( (position < squares) && (minefield[position] != COVERED_MINE) ) {
-                
-                currentColumn = position % width; //mille pystyriville miina tulee
-                minefield[position] = COVERED_MINE;
-                usedMines++;
-                
-                //seuraavaksi kasvatetaan asetetun miinan viereisten ruutujen arvoja, jotka kertovat
-                //ympäröivien miinojen määrän. Ympäröiviä ruutuja on 8, paitsi reunoissa. 
-                if (currentColumn > 0) {
-                    
-                    square = position - 1 - width;                    
-                    if (square >= 0) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }
-                    
-                    square = position - 1;
-                    if (square >= 0) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }
-                    
-                    square = position + width - 1;
-                    if (square < squares) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }
-                    
-                }
-                
-                square = position - width;
-                if (square >= 0) {
-                    if (minefield[square] != COVERED_MINE) {
-                        minefield[square] += 1;
-                    }
-                }
-                
-                square = position + width;
-                if (square < squares) {
-                    if (minefield[square] != COVERED_MINE) {
-                        minefield[square] += 1;
-                    }
-                }
-                
-                if (currentColumn < (width - 1)) {
-                    
-                    square = position - width + 1;
-                    if (square >= 0) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }
-                    
-                    square = position + width + 1;
-                    if (square < squares) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }
-                    
-                    square = position + 1;
-                    if (square < squares) {
-                        if (minefield[square] != COVERED_MINE) {
-                            minefield[square] += 1;
-                        }
-                    }                    
-                }                
-            }            
-        }        
+
+    public Board(int height, int width, int mines) {
+        this.height = height;
+        this.width = width;
+        this.mines = mines;
+        this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua
     }
-    
-    public void drawMinefield() {
-        
+
+    public void createField() {
+
+        Random random = new Random();
+        minesLeft = mines;
+        minefield = new int[height][width];
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (minefield[i + j] == COVERED_MINE) {
+                minefield[i][j] = COVERED;  //alussa kaikki ruudut on tietysti peitetty
+            }
+        }
+
+        int usedMines = 0;
+        int y;
+        int x;        
+
+        while (usedMines < mines) { //sijoitetaan miinat
+
+            //valitaan satunnainen paikka miinalle
+            y = random.nextInt(height);
+            x = random.nextInt(width);
+
+            if ((minefield[y][x] != COVERED_MINE)) {
+
+                minefield[y][x] = COVERED_MINE;
+                usedMines++;
+
+                //seuraavaksi kasvatetaan asetetun miinan viereisten ruutujen arvoja, jotka kertovat
+                //ympäröivien miinojen määrän. Ympäröiviä ruutuja on 8, paitsi reunoissa. 
+                addCount(y-1, x-1);
+                addCount(y-1, x);
+                addCount(y-1, x+1);
+                
+                addCount(y,   x-1);
+                addCount(y,   x+1);
+                
+                addCount(y+1, x-1);
+                addCount(y+1, x);
+                addCount(y+1, x+1);
+            }
+        }
+    }
+
+    private void addCount(int y, int x) {
+        try {
+            if (minefield[y][x] != COVERED_MINE) {
+                minefield[y][x] += 1;
+            }
+        } catch (Exception e) { } //jos menee ulos taulukosta, ei tehdä mitään
+    }
+
+    public void drawMinefield() { //apumetodi, ei käytetä pelissä
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (minefield[i][j] == COVERED_MINE) {
                     System.out.print("*");
-                } else if (minefield[i + j] == EMPTY) {
+                } else if (minefield[i][j] - 10 == EMPTY) {
                     System.out.print(".");
                 } else {
-                    System.out.print(minefield[i + j]);
-                }                
+                    System.out.print(minefield[i][j] - 10);
+                }
             }
             System.out.println();
         }
-        
-        
     }
 }
