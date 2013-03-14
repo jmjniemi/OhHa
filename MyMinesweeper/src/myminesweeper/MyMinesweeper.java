@@ -14,7 +14,7 @@ public class MyMinesweeper {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Board b = new Board();
+        Field b = new Field();
         
         b.createField();
         

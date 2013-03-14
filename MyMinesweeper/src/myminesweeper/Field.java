@@ -6,7 +6,7 @@ package myminesweeper;
 
 import java.util.Random;
 
-public class Board {
+public class Field {
 
     //ruudut ovat numeroarvoja, mutta selkeyden vuoksi käytetään nimettyjä muuttujia
     private final int EMPTY = 0;
@@ -23,11 +23,11 @@ public class Board {
     private int minesLeft;    
     private boolean countScore;
 
-    public Board() {
+    public Field() {
         this.countScore = true;
     }
 
-    public Board(int height, int width, int mines) {
+    public Field(int height, int width, int mines) {
         this.height = height;
         this.width = width;
         this.mines = mines;
