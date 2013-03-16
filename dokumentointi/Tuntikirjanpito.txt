@@ -6,3 +6,6 @@ Koodia: 2h30min
 
 Torstai 14.3.2013
 Koodia: 1h30min
+
+Lauantai 16.3.2013
+Koodia ja JUnit-testejä: 2h

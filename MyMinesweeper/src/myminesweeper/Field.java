@@ -20,7 +20,7 @@ public class Field {
     private int mines = 99;  //
     private int height = 16; //defaul-arvot, näillä pelaamalla lasketaan pisteet
     private int width = 30;  //
-    private int minesLeft;    
+    private int minesLeft = 99;    
     private boolean countScore;
 
     public Field() {
@@ -28,24 +28,58 @@ public class Field {
     }
 
     public Field(int height, int width, int mines) {
-        this.height = height;
-        this.width = width;
-        this.mines = mines;
+        if (height < 9) {
+            this.height = 9;
+        } else if (height > 50) {
+            this.height = 50;
+        } else {
+            this.height = height;
+        }
+        
+        if (width < 9) {
+            this.width = 9;
+        } else if (width > 50) {
+            this.width = 50;
+        } else {
+            this.width = width;
+        }
+        
+        if (mines < 10) {
+            this.mines = 10;
+        } else if (mines > (this.height * this.width / 2) ) {
+            this.mines = this.height * this.width / 2;
+        } else {
+            this.mines = mines;
+        }
+        
+        minesLeft = this.mines;        
         this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua
+    }
+    
+    public int getHeight() {
+        return this.height;
+    }
+    public int getWidth() {
+        return this.width;
+    }
+    public int getMines() {
+        return this.mines;
+    }
+    public int[][] getField() {
+        return this.minefield;
     }
 
     public void createField() {
-
-        Random random = new Random();
-        minesLeft = mines;
+        
         minefield = new int[height][width];
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                minefield[i][j] = COVERED;  //alussa kaikki ruudut on tietysti peitetty
+                minefield[i][j] = COVERED;  //alussa kaikki ruudut on peitetty
             }
         }
 
+        Random random = new Random();        
         int usedMines = 0;
         int y;
         int x;        
