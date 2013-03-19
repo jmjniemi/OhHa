@@ -125,6 +125,22 @@ public class Field {
             }
         } catch (Exception e) { } //jos menee ulos taulukosta, ei tehdä mitään
     }
+    
+    public void uncover(int y, int x) {
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 9 && minefield[y][x] < 20) {
+            minefield[y][x] -= 10;
+        }
+    }
+    public void mark(int y, int x) {
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 9 && minefield[y][x] < 20) {
+            minefield[y][x] += 10;
+        }
+    }
+    public void unmark(int y, int x) {
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 19) {
+            minefield[y][x] -= 10;
+        }
+    }
 
     public void drawMinefield() {
 

@@ -145,6 +145,55 @@ public class FieldTest {
     }
     
     @Test
+    public void testUncover() {        
+        int[][] f = hardField.getField();
+        
+        assertEquals(11, f[0][0]);        
+        hardField.uncover(0, 0);        
+        assertEquals(1, f[0][0]);        
+        hardField.uncover(0, 0);        
+        assertEquals(1, f[0][0]);
+        
+        assertEquals(19, f[0][1]);        
+        hardField.uncover(0, 1);        
+        assertEquals(9, f[0][1]);
+        
+        hardField.mark(0, 2);
+        assertEquals(21, f[0][2]);
+        hardField.uncover(0, 2);
+        assertEquals(21, f[0][2]);
+    }
+    
+    @Test
+    public void testMarkAndUnmark() {
+        int[][] f = hardField.getField();
+        
+        //Empty square
+        assertEquals(10, f[0][3]);
+        hardField.mark(0, 3);
+        assertEquals(20, f[0][3]);
+        hardField.mark(0, 3);
+        assertEquals(20, f[0][3]);
+        
+        hardField.unmark(0, 3);
+        assertEquals(10, f[0][3]);
+        hardField.unmark(0, 3);
+        assertEquals(10, f[0][3]);
+        
+        //Mine square
+        assertEquals(19, f[0][1]);
+        hardField.mark(0, 1);
+        assertEquals(29, f[0][1]);
+        hardField.mark(0, 1);
+        assertEquals(29, f[0][1]);
+        
+        hardField.unmark(0, 1);
+        assertEquals(19, f[0][1]);
+        hardField.unmark(0, 1);
+        assertEquals(19, f[0][1]);
+    }
+    
+    @Test
     public void testDrawing() throws IOException {        
         String drawn = "1*1.................\r\n" +
                        "11211...............\r\n" +

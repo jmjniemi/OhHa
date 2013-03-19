@@ -12,3 +12,4 @@ Koodia ja JUnit-testejä: 2h
 
 Tiistai 19.3.2013
 JUnit-testejä: 1h30min
+Luokkakaavio, koodia ja JUnit-testejä: 1h
