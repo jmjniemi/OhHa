@@ -22,12 +22,15 @@ public class Field {
     private int width = 30;  //
     private int minesLeft = 99;    
     private boolean countScore;
+    
+    private Random random;
 
-    public Field() {
+    public Field(Random r) {
         this.countScore = true;
+        this.random = r;
     }
 
-    public Field(int height, int width, int mines) {
+    public Field(int height, int width, int mines, Random r) {
         if (height < 9) {
             this.height = 9;
         } else if (height > 50) {
@@ -54,6 +57,8 @@ public class Field {
         
         minesLeft = this.mines;        
         this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua
+        
+        this.random = r;
     }
     
     public int getHeight() {
@@ -64,6 +69,9 @@ public class Field {
     }
     public int getMines() {
         return this.mines;
+    }
+    public int getMinesLeft() {
+        return this.minesLeft;
     }
     public int[][] getField() {
         return this.minefield;
@@ -78,8 +86,7 @@ public class Field {
                 minefield[i][j] = COVERED;  //alussa kaikki ruudut on peitetty
             }
         }
-
-        Random random = new Random();        
+                
         int usedMines = 0;
         int y;
         int x;        
@@ -111,7 +118,7 @@ public class Field {
         }
     }
 
-    private void addCount(int y, int x) {
+    protected void addCount(int y, int x) {
         try {
             if (minefield[y][x] != COVERED_MINE) {
                 minefield[y][x] += 1;
@@ -119,7 +126,7 @@ public class Field {
         } catch (Exception e) { } //jos menee ulos taulukosta, ei tehdä mitään
     }
 
-    public void drawMinefield() { //apumetodi, ei käytetä pelissä
+    public void drawMinefield() {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
