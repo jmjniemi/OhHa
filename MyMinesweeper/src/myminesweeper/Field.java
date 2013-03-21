@@ -127,18 +127,30 @@ public class Field {
     }
     
     public void uncover(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 9 && minefield[y][x] < 20) {
-            minefield[y][x] -= 10;
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
+            minefield[y][x] -= COVERED;
+            if (minefield[y][x] == EMPTY) {
+                uncover(y-1, x-1);
+                uncover(y-1, x);
+                uncover(y-1, x+1);
+                
+                uncover(y, x-1);
+                uncover(y, x+1);
+                
+                uncover(y+1, x-1);
+                uncover(y+1, x);
+                uncover(y+1, x+1);
+            }
         }
     }
     public void mark(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 9 && minefield[y][x] < 20) {
-            minefield[y][x] += 10;
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
+            minefield[y][x] += MARKED;
         }
     }
     public void unmark(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > 19) {
-            minefield[y][x] -= 10;
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > COVERED_MINE) {
+            minefield[y][x] -= MARKED;
         }
     }
 

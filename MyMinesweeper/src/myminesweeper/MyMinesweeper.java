@@ -5,6 +5,7 @@
 package myminesweeper;
 
 import java.util.Random;
+import myminesweeper.ui.UI;
 
 /**
  *
@@ -13,11 +14,11 @@ import java.util.Random;
 public class MyMinesweeper {
     
     public static void main(String[] args) {
-        Field b = new Field(10, 10, 10, new Random());
+        Field field = new Field(new Random());
         
-        b.createField();
+        UI ui = new UI(field);
         
-        b.drawMinefield();
+        ui.run();
     }
     
 }
