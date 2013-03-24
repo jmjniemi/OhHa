@@ -22,6 +22,7 @@ public class Field {
     private int width = 30;  //
     private int minesLeft = 99;    
     private boolean countScore;
+    private boolean gameStatus;
     
     private Random random;
 
@@ -73,8 +74,21 @@ public class Field {
     public int getMinesLeft() {
         return this.minesLeft;
     }
+    public void squareMarked(boolean unmarked) {
+        if (unmarked) {
+            this.minesLeft--;
+        } else {
+            this.minesLeft++;
+        }        
+    }
     public int[][] getField() {
         return this.minefield;
+    }
+    public boolean getStatus() {
+        return this.gameStatus;
+    }
+    public void setStatus(boolean s) {
+        this.gameStatus = s;
     }
 
     public void createField() {

@@ -16,3 +16,9 @@ Luokkakaavio, koodia ja JUnit-testejä: 1h
 
 Torstai 21.3.2013
 Koodia: 2h30min
+
+Lauantai 23.3.2013
+Koodia: 1h30min
+
+Sunnuntai 24.3.2013
+Koodia: 2h

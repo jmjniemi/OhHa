@@ -8,8 +8,10 @@ import java.awt.Image;
 import javax.swing.JLabel;
 import myminesweeper.Field;
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -38,16 +40,11 @@ public class UI implements Runnable {
     private Image[] images;
     private boolean gameStatus;
     private JFrame frame;
+    private Paintboard paintboard;
     
     public UI(Field game) {
         
-        this.game = game;        
-        
-        images = new Image[13];
-        
-        for (int i = 0; i < 13; i++) {
-            images[i] = (new ImageIcon(this.getClass().getResource((i) + ".png"))).getImage();
-        }
+        this.game = game;
         
     }
 
@@ -70,57 +67,18 @@ public class UI implements Runnable {
         statusbar = new JLabel("");
         frame.add(statusbar, BorderLayout.SOUTH);
         
+        luoKomponentit(frame.getContentPane());
+        
         game.createField();
         minefield = game.getField();
         gameStatus = true;
-        
+        frame.repaint();        
     }
     
-    public void paint(Graphics g) {
+    public void luoKomponentit(Container container) {
+        paintboard = new Paintboard(game, statusbar, frame);
+        container.add(paintboard);
         
-        int square;
-        int uncoverCount = 0;
-        
-        for (int i = 0; i < game.getHeight(); i++) {
-            for (int j = 0; j < game.getWidth(); j++) {
-                
-                square = minefield[i][j];
-                
-                if (gameStatus && square == MINE) {
-                    gameStatus = false;
-                }
-                
-                if (!gameStatus) {
-                    if (square == COVERED_MINE) {
-                        square = PAINT_MINE;
-                    } else if (square == MARKED_MINE) {
-                        square = PAINT_MARKED;
-                    } else if (square > COVERED_MINE) {
-                        square = PAINT_WRONG;
-                    } else if (square > MINE) {
-                        square = PAINT_COVERED;
-                    }
-                } else {
-                    if (square > COVERED_MINE) {
-                        square = PAINT_MARKED;
-                    } else if (square > MINE) {
-                        square = PAINT_COVERED;
-                        uncoverCount++;
-                    }
-                }
-                
-                g.drawImage(images[square], (j * 15), (i * 15), frame);
-                
-            }
-        }
-        
-        if (uncoverCount == 0 && gameStatus) {
-            gameStatus = false;
-            statusbar.setText("You won!");
-        } else if (!gameStatus) {
-            statusbar.setText("You lost...");
-        }
-        
+        frame.addMouseListener(new MineAdapter(game, frame, statusbar));
     }
-    
 }
