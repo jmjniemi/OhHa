@@ -71,7 +71,7 @@ public class UI implements Runnable {
         paintboard = new Paintboard(game, statusbar);
         container.add(paintboard);
         
-        mouse = new MineAdapter(game, paintboard, statusbar, frame);
+        mouse = new MineAdapter(game, statusbar, paintboard);
         frame.addMouseListener(mouse);
     }
     

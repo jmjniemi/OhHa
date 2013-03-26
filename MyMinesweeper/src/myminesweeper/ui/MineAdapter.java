@@ -4,6 +4,7 @@
  */
 package myminesweeper.ui;
 
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import myminesweeper.Field;
  * @author Jaakko
  */
 public class MineAdapter extends MouseAdapter {
-    
+
     private final int EMPTY = 0;
     private final int MINE = 9;
     private final int COVERED = 10;
@@ -27,40 +28,38 @@ public class MineAdapter extends MouseAdapter {
     private Field game;
     private int[][] minefield;
     private JLabel statusbar;
-    private Paintboard paintboard;
-    private JFrame frame;
-    
-    
-    public MineAdapter(Field game, Paintboard paintboard, JLabel statusbar, JFrame frame) {
+    private Component component;
+
+    public MineAdapter(Field game, JLabel statusbar, Component component) {
         this.game = game;
-        this.minefield = game.getField(); 
-        this.paintboard = paintboard;
+        this.minefield = game.getField();
         this.statusbar = statusbar;
-        this.frame = frame;
+        this.component = component;
     }
-    
+
+    @Override
     public void mousePressed(MouseEvent e) {
-        
+
         int x = e.getX();
         int y = e.getY();
-        
+
         int cColumn = x / 15;
         int cRow = y / 15;
-        
-        boolean rep = false;
-        
+
+        boolean rep = false; //tehdäänkö repaint
+
         if (!game.getStatus()) {
             game.createField();
-            frame.repaint();
+            component.repaint();
         }
-        
+
         if ((x < game.getWidth() * 15) && (y < game.getHeight() * 15)) {
-            
+
             if (e.getButton() == MouseEvent.BUTTON3) {
-                
+
                 if (minefield[cRow][cColumn] > MINE) {
                     rep = true;
-                    
+
                     if (minefield[cRow][cColumn] <= COVERED_MINE) {
                         if (game.getMinesLeft() > 0) {
                             game.mark(cRow, cColumn);
@@ -74,25 +73,25 @@ public class MineAdapter extends MouseAdapter {
                         game.squareMarked(false);
                         statusbar.setText(Integer.toString(game.getMinesLeft()));
                     }
-                }                
+                }
             } else {
-                
+
                 if (minefield[cRow][cColumn] > COVERED_MINE) {
                     return;
                 }
                 if ((minefield[cRow][cColumn] > MINE) && (minefield[cRow][cColumn] > MARKED_MINE)) {
-                    
+
                     game.uncover(cRow, cColumn);
                     rep = true;
-                    
+
                     if (minefield[cRow][cColumn] == MINE) {
                         game.setStatus(false);
                     }
                 }
                 if (rep) {
-                    paintboard.repaint();
+                    component.repaint();
                 }
-            }            
-        }        
-    }    
+            }
+        }
+    }
 }

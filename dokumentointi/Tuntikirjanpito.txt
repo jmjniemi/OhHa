@@ -25,3 +25,4 @@ Koodia: 2h
 
 Tiistai 26.3.2013
 Koodia: 1h30min
+JUnit-testeja ja luokkakaavio: 30min

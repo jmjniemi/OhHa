@@ -145,6 +145,19 @@ public class FieldTest {
     }
     
     @Test
+    public void testSquareMarkedMethod() {
+        assertEquals(99, testField.getMinesLeft());
+        
+        testField.squareMarked(true);
+        
+        assertEquals(98, testField.getMinesLeft());
+        
+        testField.squareMarked(false);
+        
+        assertEquals(99, testField.getMinesLeft());
+    }
+    
+    @Test
     public void testUncover() {        
         int[][] f = hardField.getField();
         
