@@ -12,6 +12,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -29,11 +30,6 @@ public class UI implements Runnable {
     private final int COVERED_MINE = 19; //MINE + COVERED
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
-    private final int PAINT_MINE = 9;
-    private final int PAINT_COVERED = 10;
-    private final int PAINT_MARKED = 11;
-    private final int PAINT_WRONG = 12;    
-    
     private Field game;    
     private int[][] minefield;
     private JLabel statusbar;
@@ -41,10 +37,12 @@ public class UI implements Runnable {
     private boolean gameStatus;
     private JFrame frame;
     private Paintboard paintboard;
+    private MineAdapter mouse;
     
-    public UI(Field game) {
+    public UI() {
         
-        this.game = game;
+        this.game = new Field(new Random());
+        game.createField();
         
     }
 
@@ -59,26 +57,25 @@ public class UI implements Runnable {
  
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
          
+        luoKomponentit(frame.getContentPane());
+        
         frame.pack();
         frame.setVisible(true); 
         frame.setResizable(false);
-        frame.setLocationRelativeTo(null);        
-
-        statusbar = new JLabel("");
-        frame.add(statusbar, BorderLayout.SOUTH);
-        
-        luoKomponentit(frame.getContentPane());
-        
-        game.createField();
-        minefield = game.getField();
-        gameStatus = true;
-        frame.repaint();        
     }
     
     public void luoKomponentit(Container container) {
-        paintboard = new Paintboard(game, statusbar, frame);
+        statusbar = new JLabel("Start Minesweeping");
+        container.add(statusbar, BorderLayout.SOUTH);
+        
+        paintboard = new Paintboard(game, statusbar);
         container.add(paintboard);
         
-        frame.addMouseListener(new MineAdapter(game, frame, statusbar));
+        mouse = new MineAdapter(game, paintboard, statusbar, frame);
+        frame.addMouseListener(mouse);
+    }
+    
+    public JFrame getFrame() {
+        return frame;
     }
 }

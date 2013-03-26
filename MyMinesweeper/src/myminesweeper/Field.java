@@ -22,7 +22,7 @@ public class Field {
     private int width = 30;  //
     private int minesLeft = 99;    
     private boolean countScore;
-    private boolean gameStatus;
+    private boolean gameStatus = true;
     
     private Random random;
 

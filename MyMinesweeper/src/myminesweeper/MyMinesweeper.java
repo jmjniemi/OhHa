@@ -14,9 +14,7 @@ import myminesweeper.ui.UI;
 public class MyMinesweeper {
     
     public static void main(String[] args) {
-        Field field = new Field(new Random());
-        
-        UI ui = new UI(field);
+        UI ui = new UI();
         
         ui.run();
     }

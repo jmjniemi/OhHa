@@ -36,12 +36,12 @@ public class Paintboard extends JPanel {
     private JLabel statusbar;
     JFrame frame;
     
-    public Paintboard(Field game, JLabel statusbar, JFrame frame) {
+    public Paintboard(Field game, JLabel statusbar) {
         
         this.game = game;
         this.minefield = game.getField();
         this.statusbar = statusbar;
-        this.frame = frame;
+        
         
         images = new Image[13];
         
@@ -50,6 +50,7 @@ public class Paintboard extends JPanel {
         }
     }
     
+    @Override
     public void paint(Graphics g) {
         
         int square;

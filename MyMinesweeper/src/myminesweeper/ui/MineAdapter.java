@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import myminesweeper.Field;
 
 /**
@@ -24,16 +25,18 @@ public class MineAdapter extends MouseAdapter {
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
     private Field game;
-    private int[][] minefield;    
-    private JFrame frame;
+    private int[][] minefield;
     private JLabel statusbar;
+    private Paintboard paintboard;
+    private JFrame frame;
     
     
-    public MineAdapter(Field game, JFrame frame, JLabel statusbar) {
+    public MineAdapter(Field game, Paintboard paintboard, JLabel statusbar, JFrame frame) {
         this.game = game;
-        this.minefield = game.getField();
-        this.frame = frame;
+        this.minefield = game.getField(); 
+        this.paintboard = paintboard;
         this.statusbar = statusbar;
+        this.frame = frame;
     }
     
     public void mousePressed(MouseEvent e) {
@@ -87,7 +90,7 @@ public class MineAdapter extends MouseAdapter {
                     }
                 }
                 if (rep) {
-                    frame.repaint();
+                    paintboard.repaint();
                 }
             }            
         }        
