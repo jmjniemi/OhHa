@@ -50,8 +50,8 @@ public class UI implements Runnable {
     public void run() {  
         
         frame = new JFrame("My Minesweeper");
-        int boardWidth = game.getWidth() * 15;
-        int boardHeight = game.getHeight() * 15;
+        int boardWidth = game.getWidth() * 15 + 15;
+        int boardHeight = game.getHeight() * 15 + 60;
         
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
  

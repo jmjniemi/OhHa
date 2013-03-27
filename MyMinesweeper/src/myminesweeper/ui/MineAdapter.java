@@ -44,7 +44,7 @@ public class MineAdapter extends MouseAdapter {
         int y = e.getY();
 
         int cColumn = x / 15;
-        int cRow = y / 15;
+        int cRow = y / 15 -2;
 
         boolean rep = false; //tehdäänkö repaint
 
@@ -73,13 +73,14 @@ public class MineAdapter extends MouseAdapter {
                         game.squareMarked(false);
                         statusbar.setText(Integer.toString(game.getMinesLeft()));
                     }
+                    component.repaint();
                 }
             } else {
 
                 if (minefield[cRow][cColumn] > COVERED_MINE) {
                     return;
                 }
-                if ((minefield[cRow][cColumn] > MINE) && (minefield[cRow][cColumn] > MARKED_MINE)) {
+                if ((minefield[cRow][cColumn] > MINE) && (minefield[cRow][cColumn] < MARKED_MINE)) {
 
                     game.uncover(cRow, cColumn);
                     rep = true;
@@ -87,11 +88,11 @@ public class MineAdapter extends MouseAdapter {
                     if (minefield[cRow][cColumn] == MINE) {
                         game.setStatus(false);
                     }
-                }
-                if (rep) {
+                }                
+            }
+            if (rep) {
                     component.repaint();
                 }
-            }
         }
     }
 }
