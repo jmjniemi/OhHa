@@ -7,9 +7,7 @@ package myminesweeper.ui;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import myminesweeper.Field;
 
 /**
@@ -43,8 +41,8 @@ public class MineAdapter extends MouseAdapter {
         int x = e.getX();
         int y = e.getY();
 
-        int cColumn = x / 15;
-        int cRow = y / 15 -2;
+        int cColumn = x / 20;
+        int cRow = y / 20-1;
 
         boolean rep = false; //tehdäänkö repaint
 
@@ -53,7 +51,7 @@ public class MineAdapter extends MouseAdapter {
             component.repaint();
         }
 
-        if ((x < game.getWidth() * 15) && (y < game.getHeight() * 15)) {
+        if ((x < 495) && (y < 300)) {
 
             if (e.getButton() == MouseEvent.BUTTON3) {
 
@@ -73,7 +71,6 @@ public class MineAdapter extends MouseAdapter {
                         game.squareMarked(false);
                         statusbar.setText(Integer.toString(game.getMinesLeft()));
                     }
-                    component.repaint();
                 }
             } else {
 

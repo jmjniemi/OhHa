@@ -29,3 +29,6 @@ JUnit-testeja ja luokkakaavio: 30min
 
 Keskiviikko 27.3.2013
 Koodia: 1h
+
+Sunnuntai 7.4.2013
+Koodia: 1h

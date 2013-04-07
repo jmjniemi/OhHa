@@ -36,12 +36,12 @@ public class Paintboard extends JPanel {
     private JLabel statusbar;
     JFrame frame;
     
-    public Paintboard(Field game, JLabel statusbar) {
+    public Paintboard(Field game, JLabel statusbar, JFrame frame) {
         
         this.game = game;
         this.minefield = game.getField();
         this.statusbar = statusbar;
-        
+        this.frame = frame;
         
         images = new Image[13];
         
@@ -84,7 +84,7 @@ public class Paintboard extends JPanel {
                     }
                 }
                 
-                g.drawImage(images[square], (j * 15), (i * 15), frame);
+                g.drawImage(images[square], (j * 20), (i * 20), frame);
                 
             }
         }

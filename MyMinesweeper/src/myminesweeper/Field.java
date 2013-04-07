@@ -17,10 +17,10 @@ public class Field {
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
     private int[][] minefield; //miinakenttä 2-ulotteinen taulukko
-    private int mines = 99;  //
-    private int height = 16; //defaul-arvot, näillä pelaamalla lasketaan pisteet
-    private int width = 30;  //
-    private int minesLeft = 99;    
+    private int mines = 30;  //
+    private int height = 14; //defaul-arvot, näillä pelaamalla lasketaan pisteet
+    private int width = 14;  //
+    private int minesLeft = 30;    
     private boolean countScore;
     private boolean gameStatus = true;
     

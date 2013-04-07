@@ -50,12 +50,13 @@ public class UI implements Runnable {
     public void run() {  
         
         frame = new JFrame("My Minesweeper");
-        int boardWidth = game.getWidth() * 15 + 15;
-        int boardHeight = game.getHeight() * 15 + 60;
+        int boardWidth = game.getWidth() * 20 + 15;
+        int boardHeight = game.getHeight() * 20 + 60;
         
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
  
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
          
         luoKomponentit(frame.getContentPane());
         
@@ -68,7 +69,7 @@ public class UI implements Runnable {
         statusbar = new JLabel("Start Minesweeping");
         container.add(statusbar, BorderLayout.SOUTH);
         
-        paintboard = new Paintboard(game, statusbar);
+        paintboard = new Paintboard(game, statusbar, frame);
         container.add(paintboard);
         
         mouse = new MineAdapter(game, statusbar, paintboard);
