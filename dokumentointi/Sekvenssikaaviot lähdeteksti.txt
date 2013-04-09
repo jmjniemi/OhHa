@@ -1,0 +1,74 @@
+title Create minefield
+
+game-Field->fg-FieldGenerator: fg.createMinefield
+
+
+fg-FieldGenerator->fg-FieldGenerator: minefield = new int[][]
+
+loop kaikille taulukon arvoille
+    fg-FieldGenerator->fg-FieldGenerator: minefield[y][x] = COVERED
+end
+
+loop kaikille miinoille
+    fg-FieldGenerator->fg-FieldGenerator: y & x = random\nminefield[y][x] = COVERED_MINE\nadjacentValues ++
+end
+
+fg-FieldGenerator->game-Field: minefield
+
+
+******
+******
+
+title Right Mouse Button - target covered
+
+
+alt target unmarked
+    mouse-MineAdapter->game-Field: game.mark(y, x)
+
+game-Field->game-Field: minefield[y][x] += 10
+
+mouse-MineAdapter->game-Field: game.squareMarked(true)
+
+game-Field->game-Field: this.minesLeft--
+
+else target marked
+    mouse-MineAdapter->game-Field: game.unmark(y, x)
+
+game-Field->game-Field: minefield[y][x] -= 10
+
+mouse-MineAdapter->game-Field: game.squareMarked(false)
+
+game-Field->game-Field: this.minesLeft++
+end
+
+mouse-MineAdapter->mouse-MineAdapter: statusbar.setText(Integer.toString(game.getMinesLeft()))
+
+******
+******
+
+title Left Mouse Button - target covered & unmarked
+
+mouse-MineAdapter->game-Field: game.uncover(y, x)
+
+game-Field->game-Field: minefield[y][x] -= 10
+
+opt jos tyhja ruutu, kaikille ymparoiville, paitsi miinoille
+    game-Field->game-Field: uncover(y, x)
+end
+
+
+opt jos miina
+    mouse-MineAdapter->game-Field: game.setStatus(false)
+end
+
+******
+******
+
+title Left Mouse Button - target uncovered
+
+mouse-MineAdapter->game-Field: game.uncover(y, x)
+
+loop kaikille ymparoiville, paitsi merkityille miinoille
+    mouse-MineAdapter->game-Field: game.uncover(y, x)
+end
+
