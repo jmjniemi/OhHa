@@ -58,8 +58,8 @@ public class MineAdapter extends MouseAdapter {
         int x = e.getX();
         int y = e.getY();
 
-        int cColumn = x / 20;
-        int cRow = y / 20-1;
+        int cColumn = (x-3) / 20;
+        int cRow = (y-3) / 20-1;
 
         boolean rep = false; //tehdäänkö repaint
 
