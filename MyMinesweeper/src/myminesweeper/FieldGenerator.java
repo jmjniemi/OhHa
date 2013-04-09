@@ -8,7 +8,9 @@ import java.util.Random;
 
 /**
  *
- * @author Jaakko
+ * 
+ * 
+ * Luokka asettaa miinat taulukkoon.
  */
 public class FieldGenerator {
     
@@ -27,6 +29,15 @@ public class FieldGenerator {
     
     private Random random;
     
+    /**
+     * Konstruktori saa tarvittavat parametrit Field-oliolta
+     * 
+     * @param minefield
+     * @param height
+     * @param width
+     * @param mines
+     * @param r Random-olio, jota käytetään miinojen asettamisessa
+     */
     public FieldGenerator(int[][] minefield, int height, int width, int mines, Random r) {
         this.minefield = minefield;
         this.height = height;
@@ -34,7 +45,13 @@ public class FieldGenerator {
         this.mines = mines;
         this.random = r;
     }
-    
+    /**
+     * Metodi asettaa miinat kenttään. Jokaisen miinanasetuksen jälkeen viereisiä
+     * taulukon arvoja kasvatetaan yhdellä. Näin jokainen ruutu tietää montako
+     * miinaa sen ympärillä on.
+     * 
+     * @return Palauttaa miinakentän, johon miinat on asetettu
+     */
     public int[][] createField() {
         
         minefield = new int[height][width];

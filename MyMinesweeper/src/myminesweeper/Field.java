@@ -1,10 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package myminesweeper;
 
 import java.util.Random;
+
+/**
+ *  
+ * Luokka luo kaksiulootteisen Integer-taulukon miinakentäksi ja hoitaa muutokset siihen
+ * 
+ * 
+ */
 
 public class Field {
 
@@ -26,11 +29,24 @@ public class Field {
     
     private FieldGenerator fg;
 
+    /**
+     * Ensimmäinen konstruktori luo pelin default-arvoilla. Pistelasku sallitaan.
+     * 
+     * @param r Random-olio, joka lähetetään eteenpäin FieldGenerator-oliolle
+     */
     public Field(Random r) {
         this.countScore = true;        
         this.fg = new FieldGenerator(minefield, height, width, mines, r);
     }
 
+    /**
+     * Toinen kostruktori, joka luo käyttäjän haluaman miinakentän tietyin rajoituksin
+     * 
+     * @param height käyttäjän antama korkeus
+     * @param width käyttäjän antama leveys
+     * @param mines käyttämän antama miinamäärä
+     * @param r Random-olio, joka lähetetään eteenpäin FieldGenerator-oliolle
+     */
     public Field(int height, int width, int mines, Random r) {
         if (height < 9) {
             this.height = 9;
@@ -91,12 +107,21 @@ public class Field {
         }        
     }
 
+    /**
+     * FieldGenerator-olio asettaa miinat kenttään
+     */
     public void createField() {
         this.minefield = fg.createField();
     }
     
     
-    
+    /**
+     * Annettu talukon arvo paljastetaan.
+     * Jos ruutu on tyhjä, paljastetaan ympäröivätkin ruudut
+     * 
+     * @param y
+     * @param x 
+     */
     public void uncover(int y, int x) {
         if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
             minefield[y][x] -= COVERED;
@@ -114,17 +139,32 @@ public class Field {
             }
         }
     }
+    /**
+     * Annettu taulukon arvo merkitään miinaksi
+     * 
+     * @param y
+     * @param x 
+     */
     public void mark(int y, int x) {
         if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
             minefield[y][x] += MARKED;
         }
     }
+    /**
+     * Merkitty miina asetetaan takaisin merkitsemättömäksi
+     * 
+     * @param y
+     * @param x 
+     */
     public void unmark(int y, int x) {
         if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > COVERED_MINE) {
             minefield[y][x] -= MARKED;
         }
     }
 
+    /**
+     * Apumetodi, joka tulostaa merkkiesityksen luodusta miinakentästä. Ei käytetä varsinaisessa pelissä.
+     */
     public void drawMinefield() {
 
         for (int i = 0; i < height; i++) {

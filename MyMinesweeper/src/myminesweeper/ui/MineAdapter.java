@@ -12,7 +12,9 @@ import myminesweeper.Field;
 
 /**
  *
- * @author Jaakko
+ * 
+ * 
+ * Luokka hoitaa vuorovaikutuksen käyttäjän ja kentän välillä
  */
 public class MineAdapter extends MouseAdapter {
 
@@ -28,6 +30,13 @@ public class MineAdapter extends MouseAdapter {
     private JLabel statusbar;
     private Component component;
 
+    /**
+     * Konstruktori saa UI:lta tarvittavat parametrit
+     * 
+     * @param game
+     * @param statusbar
+     * @param component 
+     */
     public MineAdapter(Field game, JLabel statusbar, Component component) {
         this.game = game;
         this.minefield = game.getField();
@@ -35,6 +44,14 @@ public class MineAdapter extends MouseAdapter {
         this.component = component;
     }
 
+    /**
+     * Metodi tekee muutoksia miinakenttään sen mukaan, mitä näppäintä painettiin
+     * ja mihin ruutuun osuttiin. Vasen näppäin merkitsee miinan, oikea paljastaa
+     * ruudun, ja jos klikataan paljastettua ruutua, kaikki ympärillä olevat
+     * ruudut paljastetaan.
+     * 
+     * @param e 
+     */
     @Override
     public void mousePressed(MouseEvent e) {
 

@@ -13,8 +13,10 @@ import javax.swing.WindowConstants;
 import myminesweeper.Field;
 
 /**
- *
- * @author Jaakko
+ *Käyttöliittymä. Luo alueen, jolle ruudut piirretään, ja asettaa sen alle
+ *tekstikentän, jossa näkyy jäljelläolevien miinojen määrä
+ * 
+ * 
  */
 public class UI implements Runnable {
     
@@ -24,6 +26,12 @@ public class UI implements Runnable {
     private Paintboard paintboard;
     private MineAdapter mouse;
     
+    /**
+     * Kostruktori saa parametrinä Field-olion, jonka se lähettää eteenpäin
+     * piirtoalustalle ja hiiriadapterille
+     * 
+     * @param game Field-olio
+     */
     public UI(Field game) {
         
         this.game = game;
@@ -31,6 +39,7 @@ public class UI implements Runnable {
         
     }
 
+    
     @Override
     public void run() {  
         
@@ -49,7 +58,14 @@ public class UI implements Runnable {
         frame.setVisible(true); 
         frame.setResizable(false);
     }
-    
+    /**
+     * Käyttöliittymään kuuluu alue, jolle piirtoalusta piirtää graafisen
+     * esityksen miinakentästä, tilarivi, jossa on tieto jäljelläolevista
+     * miinoista, sekä hiiriadapteri, jolla vuorovaikutus kentän kanssa
+     * tapahtuu.
+     * 
+     * @param container 
+     */
     public void luoKomponentit(Container container) {
         statusbar = new JLabel("Start Minesweeping");
         container.add(statusbar, BorderLayout.SOUTH);

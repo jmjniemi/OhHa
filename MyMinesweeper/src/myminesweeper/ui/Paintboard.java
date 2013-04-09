@@ -14,7 +14,9 @@ import myminesweeper.Field;
 
 /**
  *
- * @author Jaakko
+ * 
+ * 
+ * Luokka luo graafisen esityksen miinakentästä.
  */
 public class Paintboard extends JPanel {
     
@@ -36,6 +38,13 @@ public class Paintboard extends JPanel {
     private JLabel statusbar;
     JFrame frame;
     
+    /**
+     * Konstruktori tallentaa taulukkoon png-kuvatiedostot eri ruuduista.
+     * 
+     * @param game
+     * @param statusbar
+     * @param frame 
+     */
     public Paintboard(Field game, JLabel statusbar, JFrame frame) {
         
         this.game = game;
@@ -50,6 +59,12 @@ public class Paintboard extends JPanel {
         }
     }
     
+    /**
+     * Metodi käy läpi miinakenttä-taulukon ja määrittää mitä kuvaa millekin
+     * arvolle käytetään.
+     * 
+     * @param g 
+     */
     @Override
     public void paint(Graphics g) {
         

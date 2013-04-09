@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package myminesweeper;
 
 import java.util.Random;
@@ -9,19 +5,23 @@ import myminesweeper.ui.UI;
 
 /**
  *
- * @author Jaakko
+ * 
+ * 
+ * Luokka luo uuden pelin ja käyttöliittymän
  */
 public class GameSetUp {
     
     private Field game;
+    private UI ui;
     
     public GameSetUp() {
         this.game = new Field(new Random());
+        this.ui = new UI(game);
     }
-    
+    /**
+     * metodi käynnistää käyttöliittymän
+     */
     public void launch() {
-        UI ui = new UI(game);
-        
         ui.run();
     }
 }
