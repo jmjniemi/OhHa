@@ -85,7 +85,20 @@ public class MineAdapter extends MouseAdapter {
                     if (minefield[cRow][cColumn] == MINE) {
                         game.setStatus(false);
                     }
-                }                
+                } else if (minefield[cRow][cColumn] < MINE) {
+                    game.uncover(cRow-1, cColumn-1);
+                    game.uncover(cRow-1, cColumn);
+                    game.uncover(cRow-1, cColumn+1);
+                    
+                    game.uncover(cRow, cColumn-1);
+                    game.uncover(cRow, cColumn+1);
+                    
+                    game.uncover(cRow+1, cColumn-1);
+                    game.uncover(cRow+1, cColumn);
+                    game.uncover(cRow+1, cColumn+1);
+                    
+                    rep = true;
+                }
             }
             if (rep) {
                     component.repaint();

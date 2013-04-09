@@ -4,9 +4,6 @@
  */
 package myminesweeper;
 
-import java.util.Random;
-import myminesweeper.ui.UI;
-
 /**
  *
  * @author Jaakko
@@ -14,9 +11,8 @@ import myminesweeper.ui.UI;
 public class MyMinesweeper {
     
     public static void main(String[] args) {
-        UI ui = new UI();
-        
-        ui.run();
+        GameSetUp g = new GameSetUp();
+        g.launch();
     }
     
 }

@@ -4,18 +4,13 @@
  */
 package myminesweeper.ui;
 
-import java.awt.Image;
-import javax.swing.JLabel;
-import myminesweeper.Field;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.util.Random;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+import myminesweeper.Field;
 
 /**
  *
@@ -23,25 +18,15 @@ import javax.swing.WindowConstants;
  */
 public class UI implements Runnable {
     
-    private final int EMPTY = 0;
-    private final int MINE = 9;
-    private final int COVERED = 10;
-    private final int MARKED = 10;
-    private final int COVERED_MINE = 19; //MINE + COVERED
-    private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
-    
-    private Field game;    
-    private int[][] minefield;
+    private Field game;
     private JLabel statusbar;
-    private Image[] images;
-    private boolean gameStatus;
     private JFrame frame;
     private Paintboard paintboard;
     private MineAdapter mouse;
     
-    public UI() {
+    public UI(Field game) {
         
-        this.game = new Field(new Random());
+        this.game = game;
         game.createField();
         
     }

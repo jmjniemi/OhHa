@@ -22,13 +22,13 @@ public class Field {
     private int width = 14;  //
     private int minesLeft = 30;    
     private boolean countScore;
-    private boolean gameStatus = true;
+    private boolean gameStatus = true;    
     
-    private Random random;
+    private FieldGenerator fg;
 
     public Field(Random r) {
-        this.countScore = true;
-        this.random = r;
+        this.countScore = true;        
+        this.fg = new FieldGenerator(minefield, height, width, mines, r);
     }
 
     public Field(int height, int width, int mines, Random r) {
@@ -56,10 +56,10 @@ public class Field {
             this.mines = mines;
         }
         
-        minesLeft = this.mines;        
-        this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua
+        this.minesLeft = this.mines;        
+        this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua        
         
-        this.random = r;
+        this.fg = new FieldGenerator(minefield, height, width, mines, r);
     }
     
     public int getHeight() {
@@ -73,14 +73,7 @@ public class Field {
     }
     public int getMinesLeft() {
         return this.minesLeft;
-    }
-    public void squareMarked(boolean unmarked) {
-        if (unmarked) {
-            this.minesLeft--;
-        } else {
-            this.minesLeft++;
-        }        
-    }
+    }    
     public int[][] getField() {
         return this.minefield;
     }
@@ -90,55 +83,19 @@ public class Field {
     public void setStatus(boolean s) {
         this.gameStatus = s;
     }
+    public void squareMarked(boolean unmarked) {
+        if (unmarked) {
+            this.minesLeft--;
+        } else {
+            this.minesLeft++;
+        }        
+    }
 
     public void createField() {
-        
-        minefield = new int[height][width];
-
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                minefield[i][j] = COVERED;  //alussa kaikki ruudut on peitetty
-            }
-        }
-                
-        int usedMines = 0;
-        int y;
-        int x;        
-
-        while (usedMines < mines) { //sijoitetaan miinat
-
-            //valitaan satunnainen paikka miinalle
-            y = random.nextInt(height);
-            x = random.nextInt(width);
-
-            if ((minefield[y][x] != COVERED_MINE)) {
-
-                minefield[y][x] = COVERED_MINE;
-                usedMines++;
-
-                //seuraavaksi kasvatetaan asetetun miinan viereisten ruutujen arvoja, jotka kertovat
-                //ympäröivien miinojen määrän. Ympäröiviä ruutuja on 8, paitsi reunoissa. 
-                addCount(y-1, x-1);
-                addCount(y-1, x);
-                addCount(y-1, x+1);
-                
-                addCount(y,   x-1);
-                addCount(y,   x+1);
-                
-                addCount(y+1, x-1);
-                addCount(y+1, x);
-                addCount(y+1, x+1);
-            }
-        }
+        this.minefield = fg.createField();
     }
-
-    protected void addCount(int y, int x) {
-        try {
-            if (minefield[y][x] != COVERED_MINE) {
-                minefield[y][x] += 1;
-            }
-        } catch (Exception e) { } //jos menee ulos taulukosta, ei tehdä mitään
-    }
+    
+    
     
     public void uncover(int y, int x) {
         if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
