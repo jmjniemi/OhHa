@@ -59,6 +59,10 @@ public class Paintboard extends JPanel {
         }
     }
     
+    public void setMinefield(int[][] mfield) {
+        this.minefield = mfield;
+    }
+    
     /**
      * Metodi käy läpi miinakenttä-taulukon ja määrittää mitä kuvaa millekin
      * arvolle käytetään.

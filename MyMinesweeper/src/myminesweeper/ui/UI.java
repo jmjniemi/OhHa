@@ -67,7 +67,7 @@ public class UI implements Runnable {
      * @param container 
      */
     public void luoKomponentit(Container container) {
-        statusbar = new JLabel("Start Minesweeping");
+        statusbar = new JLabel("Start Minesweeping!");
         container.add(statusbar, BorderLayout.SOUTH);
         
         paintboard = new Paintboard(game, statusbar, frame);

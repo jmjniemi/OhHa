@@ -90,6 +90,9 @@ public class Field {
     public int getMinesLeft() {
         return this.minesLeft;
     }    
+    public void resetMinesLeft() {
+        this.minesLeft = this.mines;
+    }
     public int[][] getField() {
         return this.minefield;
     }
