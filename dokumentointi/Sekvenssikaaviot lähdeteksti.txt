@@ -5,9 +5,13 @@ game-Field->fg-FieldGenerator: fg.createMinefield
 
 fg-FieldGenerator->fg-FieldGenerator: minefield = new int[][]
 
+fg-FieldGenerator->fg-FieldGenerator: initialize()
+
 loop kaikille taulukon arvoille
     fg-FieldGenerator->fg-FieldGenerator: minefield[y][x] = COVERED
 end
+
+fg-FieldGenerator->fg-FieldGenerator: deployMines()
 
 loop kaikille miinoille
     fg-FieldGenerator->fg-FieldGenerator: y & x = random\nminefield[y][x] = COVERED_MINE\nadjacentValues ++
@@ -21,34 +25,42 @@ fg-FieldGenerator->game-Field: minefield
 
 title Right Mouse Button - target covered
 
+mouse-MineAdapter->ca-ClickActions: rightClick(y, x) 
 
 alt target unmarked
-    mouse-MineAdapter->game-Field: game.mark(y, x)
+    ca-ClickActions->game-Field: game.mark(y, x)
 
 game-Field->game-Field: minefield[y][x] += 10
 
-mouse-MineAdapter->game-Field: game.squareMarked(true)
+ca-ClickActions->game-Field: game.squareMarked(true)
 
 game-Field->game-Field: this.minesLeft--
 
+ca-ClickActions->mouse-MineAdapter: return (Integer.toString(game.getMinesLeft()))
+
 else target marked
-    mouse-MineAdapter->game-Field: game.unmark(y, x)
+    ca-ClickActions->game-Field: game.unmark(y, x)
 
 game-Field->game-Field: minefield[y][x] -= 10
 
-mouse-MineAdapter->game-Field: game.squareMarked(false)
+ca-ClickActions->game-Field: game.squareMarked(false)
 
 game-Field->game-Field: this.minesLeft++
 end
 
-mouse-MineAdapter->mouse-MineAdapter: statusbar.setText(Integer.toString(game.getMinesLeft()))
+ca-ClickActions->mouse-MineAdapter: return (Integer.toString(game.getMinesLeft()))
+
+mouse-MineAdapter->mouse-MineAdapter: statusbar.setText(return value)
+
 
 ******
 ******
 
 title Left Mouse Button - target covered & unmarked
 
-mouse-MineAdapter->game-Field: game.uncover(y, x)
+mouse-MineAdapter->ca-ClickActions: leftClick(y, x)
+
+ca-ClickActions->game-Field: game.uncover(y, x)
 
 game-Field->game-Field: minefield[y][x] -= 10
 
@@ -58,17 +70,20 @@ end
 
 
 opt jos miina
-    mouse-MineAdapter->game-Field: game.setStatus(false)
+    ca-ClickActions->game-Field: game.setStatus(false)
 end
-
 ******
 ******
 
 title Left Mouse Button - target uncovered
 
-mouse-MineAdapter->game-Field: game.uncover(y, x)
+mouse-MineAdapter->ca-ClickActions: leftClick(y, x)
+
+ca-ClickActions->game-Field: game.uncover(y, x)
+
+ca-ClickActions->ca-ClickActions: massClick(y, x)
 
 loop kaikille ymparoiville, paitsi merkityille miinoille
-    mouse-MineAdapter->game-Field: game.uncover(y, x)
+    ca-ClickActions->game-Field: game.uncover(y, x)
 end
 

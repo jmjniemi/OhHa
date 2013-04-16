@@ -43,3 +43,4 @@ Koodia: 2h
 Koodia: 2h
 JUnit-testejä: 1h
 Dokumentointia: 1h
+Sekvenssikaavioita ja JavaDoc: 2h

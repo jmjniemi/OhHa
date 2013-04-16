@@ -23,7 +23,7 @@ public class Field {
     private int height;
     private int width;
     private int minesLeft;    
-    private boolean countScore = false;
+    private boolean countScore;
     private boolean gameStatus = true;    
     
     private FieldGenerator fg;
@@ -58,6 +58,8 @@ public class Field {
         setMines(mines);
         
         this.minesLeft = this.mines;
+        
+        this.countScore = false;
         
         this.fg = new FieldGenerator(minefield, height, width, mines, r);
     }

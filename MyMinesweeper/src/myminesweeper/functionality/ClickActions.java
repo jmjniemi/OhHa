@@ -6,7 +6,7 @@ package myminesweeper.functionality;
 
 /**
  *
- * @author Jaakko
+ * Luokka toteuttaa hiirenklikkausten tuottamat muutokset miinakenttään
  */
 public class ClickActions {
 
@@ -21,6 +21,14 @@ public class ClickActions {
         this.minefield = mfield;
     }
 
+    /**
+     * Metodi merkitsee miinaksi, tai poistaa merkinnän parametrinaan saamaan
+     * ruutuun ja palauttaa statusbariin asetettavan tekstin
+     * 
+     * @param y
+     * @param x
+     * @return 
+     */
     public String rightClick(int y, int x) {
         if (game.checkIfInBounds(y, x)) {
 
@@ -44,6 +52,13 @@ public class ClickActions {
         }
     }
 
+    /**
+     * Paljastaa parametrinaan saaman ruudun jos mahdollista. Jos ruutu on jo
+     * paljastettu, kutsuu massClick-metodia
+     * 
+     * @param y
+     * @param x 
+     */
     public void leftClick(int y, int x) {
         if (game.checkIfInBounds(y, x)) {
 
@@ -63,6 +78,13 @@ public class ClickActions {
         }
     }
 
+    /**
+     * Paljastaa kaikki parametrinä saamansa ruudun ympärillä olevat ruudut, 
+     * jos oikea määrä miinoja on merkitty
+     * 
+     * @param y
+     * @param x 
+     */
     protected void massClick(int y, int x) {
         if (countAdjacentMines(y, x) == minefield[y][x]) {
             game.uncover(y - 1, x - 1);
@@ -79,6 +101,13 @@ public class ClickActions {
 
     }
 
+    /**
+     * Laskee parametrina saamansa ruudun ympäriltä merkityt miinat
+     * 
+     * @param y
+     * @param x
+     * @return 
+     */
     protected int countAdjacentMines(int y, int x) {
         int adjacentMines = 0;
 

@@ -42,10 +42,7 @@ public class MineAdapter extends MouseAdapter {
     }
 
     /**
-     * Metodi tekee muutoksia miinakenttään sen mukaan, mitä näppäintä painettiin
-     * ja mihin ruutuun osuttiin. Vasen näppäin merkitsee miinan, oikea paljastaa
-     * ruudun, ja jos klikataan paljastettua ruutua, kaikki ympärillä olevat
-     * ruudut paljastetaan, jos oikea määrä miinoja on merkitty ympäriltä.
+     * Metodi 
      * 
      * @param e 
      */
