@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package myminesweeper;
+package myminesweeper.functionality;
 
 import java.util.Random;
 
@@ -14,13 +14,9 @@ import java.util.Random;
  */
 public class FieldGenerator {
     
-    //ruudut ovat numeroarvoja, mutta selkeyden vuoksi käytetään nimettyjä muuttujia
-    private final int EMPTY = 0;
-    private final int MINE = 9;
+    //ruudut ovat numeroarvoja, mutta selkeyden vuoksi käytetään nimettyjä muuttujia    
     private final int COVERED = 10;
-    private final int MARKED = 10;
     private final int COVERED_MINE = 19; //MINE + COVERED
-    private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
     private int[][] minefield;
     private int height;
@@ -50,18 +46,31 @@ public class FieldGenerator {
      * taulukon arvoja kasvatetaan yhdellä. Näin jokainen ruutu tietää montako
      * miinaa sen ympärillä on.
      * 
+     * Miinan paikat arvotaan Random-oliolla. Testauksessa käytetään omaa Random-oliota,
+     * jonka "arpomat" luvut ovat aina samat.
+     * 
      * @return Palauttaa miinakentän, johon miinat on asetettu
      */
     public int[][] createField() {
         
         minefield = new int[height][width];
 
+        initialize();
+        
+        deployMines();
+        
+        return minefield;
+    }
+    
+    protected void initialize() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 minefield[i][j] = COVERED;  //alussa kaikki ruudut on peitetty
             }
         }
-                
+    }
+    
+    protected void deployMines() {
         int usedMines = 0;
         int y;
         int x;        
@@ -91,7 +100,6 @@ public class FieldGenerator {
                 addCount(y+1, x+1);
             }
         }
-        return minefield;
     }
     
     protected void addCount(int y, int x) {

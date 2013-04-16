@@ -1,4 +1,4 @@
-package myminesweeper;
+package myminesweeper.functionality;
 
 /*
  * To change this template, choose Tools | Templates
@@ -11,10 +11,10 @@ import java.io.PrintStream;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -64,11 +64,11 @@ public class FieldTest {
         Field b = new Field(-10, 10, 10, random);
         assertEquals(9, b.getHeight());
         
-        Field c = new Field(51, 10, 10, random);
-        assertEquals(50, c.getHeight());
+        Field c = new Field(31, 10, 10, random);
+        assertEquals(30, c.getHeight());
         
         Field d = new Field(234234, 10, 10, random);
-        assertEquals(50, d.getHeight());
+        assertEquals(30, d.getHeight());
     }
     
     @Test
@@ -81,11 +81,11 @@ public class FieldTest {
         Field b = new Field(10, -10, 1233, random);
         assertEquals(9, b.getWidth());
         
-        Field c = new Field(10, 51, 7, random);
-        assertEquals(50, c.getWidth());
+        Field c = new Field(10, 31, 7, random);
+        assertEquals(30, c.getWidth());
         
         Field d = new Field(10, 345343, 10, random);
-        assertEquals(50, d.getWidth());
+        assertEquals(30, d.getWidth());
     }
     
     @Test
@@ -128,20 +128,6 @@ public class FieldTest {
         assertEquals(11, f[0][0]);
         
         assertEquals(12, f[1][2]);
-    }
-    
-    @Test
-    public void testAddCount() {
-        int[][] f = hardField.getField();
-        
-        hardField.addCount(0, 1);
-        assertEquals(19, f[0][1]);
-        
-        hardField.addCount(0, 0);
-        hardField.addCount(0, 0);
-        hardField.addCount(0, 0);
-        
-        assertEquals(14, f[0][0]);
     }
     
     @Test

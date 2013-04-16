@@ -1,4 +1,4 @@
-package myminesweeper;
+package myminesweeper.functionality;
 
 import java.util.Random;
 
@@ -17,14 +17,13 @@ public class Field {
     private final int COVERED = 10;
     private final int MARKED = 10;
     private final int COVERED_MINE = 19; //MINE + COVERED
-    private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
     private int[][] minefield; //miinakenttä 2-ulotteinen taulukko
-    private int mines = 30;  //
-    private int height = 14; //defaul-arvot, näillä pelaamalla lasketaan pisteet
-    private int width = 14;  //
-    private int minesLeft = 30;    
-    private boolean countScore;
+    private int mines;
+    private int height;
+    private int width;
+    private int minesLeft;    
+    private boolean countScore = false;
     private boolean gameStatus = true;    
     
     private FieldGenerator fg;
@@ -35,6 +34,9 @@ public class Field {
      * @param r Random-olio, joka lähetetään eteenpäin FieldGenerator-oliolle
      */
     public Field(Random r) {
+        
+        this(16, 30, 99, r);
+        
         this.countScore = true;        
         this.fg = new FieldGenerator(minefield, height, width, mines, r);
     }
@@ -48,34 +50,44 @@ public class Field {
      * @param r Random-olio, joka lähetetään eteenpäin FieldGenerator-oliolle
      */
     public Field(int height, int width, int mines, Random r) {
-        if (height < 9) {
-            this.height = 9;
-        } else if (height > 50) {
-            this.height = 50;
-        } else {
-            this.height = height;
-        }
         
-        if (width < 9) {
-            this.width = 9;
-        } else if (width > 50) {
-            this.width = 50;
-        } else {
-            this.width = width;
-        }
+        setHeightOrWidth(height, true);
         
-        if (mines < 10) {
-            this.mines = 10;
-        } else if (mines > (this.height * this.width / 2) ) {
-            this.mines = this.height * this.width / 2;
-        } else {
-            this.mines = mines;
-        }
+        setHeightOrWidth(width, false);
         
-        this.minesLeft = this.mines;        
-        this.countScore = false; //pelaaja voi pelata myös omilla arvoillaan ilman pistelaskua        
+        setMines(mines);
+        
+        this.minesLeft = this.mines;
         
         this.fg = new FieldGenerator(minefield, height, width, mines, r);
+    }
+    
+    protected final void setHeightOrWidth(int p, boolean isHeight) {
+        int param = p;
+        
+        if (param < 9) {
+            param = 9;
+        } else if (param > 30) {
+            param = 30;
+        }
+        
+        if (isHeight) {
+            this.height = param;
+        } else {
+            this.width = param;
+        }
+    }
+    
+    protected final void setMines(int p) {
+        int param = p;
+        
+        if (param < 10) {
+            param = 10;
+        } else if (param > (this.height * this.width / 2) ) {
+            param = this.height * this.width / 2;
+        }
+        
+        this.mines = param;
     }
     
     public int getHeight() {
@@ -126,7 +138,7 @@ public class Field {
      * @param x 
      */
     public void uncover(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
+        if (checkIfInBounds(y, x) && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
             minefield[y][x] -= COVERED;
             if (minefield[y][x] == EMPTY) {
                 uncover(y-1, x-1);
@@ -149,7 +161,7 @@ public class Field {
      * @param x 
      */
     public void mark(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
+        if (checkIfInBounds(y, x) && minefield[y][x] > MINE && minefield[y][x] < EMPTY+COVERED+MARKED) {
             minefield[y][x] += MARKED;
         }
     }
@@ -160,8 +172,16 @@ public class Field {
      * @param x 
      */
     public void unmark(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height && minefield[y][x] > COVERED_MINE) {
+        if (checkIfInBounds(y, x) && minefield[y][x] > COVERED_MINE) {
             minefield[y][x] -= MARKED;
+        }
+    }
+    
+    protected boolean checkIfInBounds(int y, int x) {
+        if (y >= 0 && y < this.height && x >= 0 && x < this.height) {
+            return true;
+        } else {
+            return false;
         }
     }
 

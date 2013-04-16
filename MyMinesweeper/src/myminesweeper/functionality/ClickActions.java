@@ -4,8 +4,6 @@
  */
 package myminesweeper.functionality;
 
-import myminesweeper.Field;
-
 /**
  *
  * @author Jaakko
@@ -24,40 +22,48 @@ public class ClickActions {
     }
 
     public String rightClick(int y, int x) {
-        if (minefield[y][x] <= 9) {
-            return (Integer.toString(game.getMinesLeft()));
-        } else if (minefield[y][x] <= 19) {
-            if (game.getMinesLeft() > 0) {
-                game.mark(y, x);
-                game.squareMarked(true);
+        if (game.checkIfInBounds(y, x)) {
+
+            if (minefield[y][x] <= 9) {
                 return (Integer.toString(game.getMinesLeft()));
+            } else if (minefield[y][x] <= 19) {
+                if (game.getMinesLeft() > 0) {
+                    game.mark(y, x);
+                    game.squareMarked(true);
+                    return (Integer.toString(game.getMinesLeft()));
+                } else {
+                    return "No marks left";
+                }
             } else {
-                return "No marks left";
+                game.unmark(y, x);
+                game.squareMarked(false);
+                return (Integer.toString(game.getMinesLeft()));
             }
         } else {
-            game.unmark(y, x);
-            game.squareMarked(false);
             return (Integer.toString(game.getMinesLeft()));
         }
     }
 
     public void leftClick(int y, int x) {
-        if (minefield[y][x] > 19) {
-            return;
-        }
-        if ((minefield[y][x] > 9) && (minefield[y][x] < 29)) {
+        if (game.checkIfInBounds(y, x)) {
 
-            game.uncover(y, x);
-
-            if (minefield[y][x] == 9) {
-                game.setStatus(false);
+            if (minefield[y][x] > 19) {
+                return;
             }
-        } else if (minefield[y][x] < 9) {
-            massClick(y, x);
+            if ((minefield[y][x] > 9) && (minefield[y][x] < 29)) {
+
+                game.uncover(y, x);
+
+                if (minefield[y][x] == 9) {
+                    game.setStatus(false);
+                }
+            } else if (minefield[y][x] < 9) {
+                massClick(y, x);
+            }
         }
     }
 
-    private void massClick(int y, int x) {
+    protected void massClick(int y, int x) {
         if (countAdjacentMines(y, x) == minefield[y][x]) {
             game.uncover(y - 1, x - 1);
             game.uncover(y - 1, x);
@@ -73,45 +79,40 @@ public class ClickActions {
 
     }
 
-    private int countAdjacentMines(int y, int x) {
+    protected int countAdjacentMines(int y, int x) {
         int adjacentMines = 0;
 
-        if (y > 0 && x > 0) {
-            if (minefield[y - 1][x - 1] == 29) {
-                adjacentMines++;
-            }
-        }
+        adjacentMines += isMine(y - 1, x - 1);
+        adjacentMines += isMine(y - 1, x);
+        adjacentMines += isMine(y - 1, x + 1);
 
-        if (y > 0 && x < (game.getWidth() - 1)) {
-            if (minefield[y - 1][x] == 29) {
-                adjacentMines++;
-            }
-            if (minefield[y - 1][x + 1] == 29) {
-                adjacentMines++;
-            }
-            if (minefield[y][x + 1] == 29) {
-                adjacentMines++;
-            }
-        }
+        adjacentMines += isMine(y, x - 1);
+        adjacentMines += isMine(y, x + 1);
 
-        if (y < (game.getHeight() - 1) && x > 0) {
-            if (minefield[y][x - 1] == 29) {
-                adjacentMines++;
-            }
-            if (minefield[y + 1][x] == 29) {
-                adjacentMines++;
-            }
-            if (minefield[y + 1][x - 1] == 29) {
-                adjacentMines++;
-            }
-        }
+        adjacentMines += isMine(y + 1, x - 1);
+        adjacentMines += isMine(y + 1, x);
+        adjacentMines += isMine(y + 1, x + 1);
 
-        if (y < (game.getHeight() - 1) && x < (game.getWidth() - 1)) {
-            if (minefield[y + 1][x + 1] == 29) {
-                adjacentMines++;
-            }
-        }
-        
         return adjacentMines;
+    }
+
+    /**
+     * Metodi tutkii parametrien ilmoittaman ruudun ja palauttaa 1 jos se on
+     * merkitty miina, 0 muuten.
+     *
+     * @param y tutkittavan ruudun y-koordinaatti
+     * @param x tutkittavan ruudun x-koordinaatti
+     * @return
+     */
+    protected int isMine(int y, int x) {
+        try {
+            if (minefield[y][x] > 19) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

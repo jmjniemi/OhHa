@@ -1,5 +1,6 @@
 package myminesweeper;
 
+import myminesweeper.functionality.Field;
 import java.util.Random;
 import myminesweeper.ui.UI;
 

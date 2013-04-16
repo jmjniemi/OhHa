@@ -2,11 +2,13 @@ Aihe: Miinaharava
 
 Yksinkertainen miinaharava. Alussa x*y kokoinen ruudukko, johon piilotettu z miinaa. Paljastamatonta ruutua 
 klikkaamalla ruudun alta paljastuu joko miina, jolloin peli loppuu, tai numero, joka ilmoittaa ruudun viereisiss‰
-ruuduissa olevien miinojen lukum‰‰r‰n. Kun kaikki miinattomat ruudut on paljastettu, peli loppuu.
+ruuduissa olevien miinojen lukum‰‰r‰n. Kun kaikki miinattomat ruudut on paljastettu, peli loppuu. Lis‰‰
+toiminnallisuudesta k‰yttˆohje-tekstitiedostossa.
 
 Mahdollisia lis‰ominaisuuksia:
 -Ajanlasku. Parhaiden aikojen tallentaminen high score -listaan
--Hiiren vasenta nappia klikkaamalla paljastamaton ruutu merkit‰‰n miinaksi
--Miinalaskuri kertoo j‰ljell‰ olevien miinojen m‰‰r‰n
--Klikkaamalla paljastettua ruutua kaikki ymp‰rill‰ olevat ruudut paljastetaan, paitsi miinat
--Upeat grafiikat - tietysti itsetehtyin‰
+-K‰ytt‰j‰n s‰‰t‰m‰t arvot miinakent‰lle
+-Hiiren vasenta nappia klikkaamalla paljastamaton ruutu merkit‰‰n miinaksi CHECK
+-Miinalaskuri kertoo j‰ljell‰ olevien miinojen m‰‰r‰n CHECK
+-Klikkaamalla paljastettua ruutua kaikki ymp‰rill‰ olevat ruudut paljastetaan, paitsi miinat CHECK
+-Upeat grafiikat - tietysti itsetehtyin‰ CHECK

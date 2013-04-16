@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package myminesweeper;
+package myminesweeper.functionality;
 
 import java.util.Random;
 

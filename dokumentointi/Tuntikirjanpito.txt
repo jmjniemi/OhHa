@@ -40,3 +40,6 @@ Sekvenssikaavioita: 1h
 
 Tiistai 16.4.2013
 Koodia: 2h
+Koodia: 2h
+JUnit-testejä: 1h
+Dokumentointia: 1h

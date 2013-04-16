@@ -8,7 +8,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
-import myminesweeper.Field;
+import myminesweeper.functionality.Field;
 import myminesweeper.functionality.ClickActions;
 
 /**
@@ -45,7 +45,7 @@ public class MineAdapter extends MouseAdapter {
      * Metodi tekee muutoksia miinakenttään sen mukaan, mitä näppäintä painettiin
      * ja mihin ruutuun osuttiin. Vasen näppäin merkitsee miinan, oikea paljastaa
      * ruudun, ja jos klikataan paljastettua ruutua, kaikki ympärillä olevat
-     * ruudut paljastetaan.
+     * ruudut paljastetaan, jos oikea määrä miinoja on merkitty ympäriltä.
      * 
      * @param e 
      */

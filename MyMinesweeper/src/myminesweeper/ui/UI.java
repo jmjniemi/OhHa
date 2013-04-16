@@ -10,7 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
-import myminesweeper.Field;
+import myminesweeper.functionality.Field;
 
 /**
  *Käyttöliittymä. Luo alueen, jolle ruudut piirretään, ja asettaa sen alle
@@ -44,17 +44,17 @@ public class UI implements Runnable {
     public void run() {  
         
         frame = new JFrame("My Minesweeper");
-        int boardWidth = game.getWidth() * 20 + 15;
+        int boardWidth = game.getWidth() * 20 + 5;
         int boardHeight = game.getHeight() * 20 + 60;
         
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
  
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
          
         luoKomponentit(frame.getContentPane());
         
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true); 
         frame.setResizable(false);
     }
