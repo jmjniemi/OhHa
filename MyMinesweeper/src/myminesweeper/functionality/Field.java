@@ -37,8 +37,7 @@ public class Field {
         
         this(16, 30, 99, r);
         
-        this.countScore = true;        
-        this.fg = new FieldGenerator(minefield, height, width, mines, r);
+        this.countScore = true;
     }
 
     /**
@@ -180,7 +179,7 @@ public class Field {
     }
     
     protected boolean checkIfInBounds(int y, int x) {
-        if (y >= 0 && y < this.height && x >= 0 && x < this.height) {
+        if (y >= 0 && y < this.height && x >= 0 && x < this.width) {
             return true;
         } else {
             return false;

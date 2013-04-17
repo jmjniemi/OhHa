@@ -1,4 +1,4 @@
-Ohjeet päivitetty 16.4.2013 14:14
+Ohjeet päivitetty 17.4.2013 14:14
 
 Ideana on paljastaa peitetystä ruudukosta kaikki miinattomat ruudut ja varottava miinoihin osumista. Klikkaamalla peitettyä ruutua paljastuu alta joko tyhjä ruutu,
 numero, tai miina. Numero kertoo, kuinka monta miinaa sen ympärillä on. Tyhjän ruudun ympärillä miinoja ei ole, ja peli paljastaakin automaattisesti kaikki
@@ -12,5 +12,4 @@ miinoja (ruudun numeron verran). Tämä nopeuttaa, muttei helpota, peliä.
 
 Miinaan osuttaessa peli päättyy ja kaikki merkitsemättömät miinat näytetään. Jos jokin merkitty ruutu ei olekaan miina, se osoitetaan omalla ruudunkuvalla.
 
-Pelin voittaa kun kaikki miinattomat ruudut on paljastettu (nykyisellä versiolla myös kaikki miinat on merkittävä...). Uuden pelin voi aloittaa klikkaamalla jotakin ruutua,
-myös jos peli päättyi miinaan.
+Pelin voittaa kun kaikki miinattomat ruudut on paljastettu. Uuden pelin voi aloittaa klikkaamalla jotakin ruutua, myös jos peli päättyi miinaan.

@@ -20,10 +20,7 @@ import myminesweeper.functionality.Field;
  */
 public class Paintboard extends JPanel {
     
-    private final int EMPTY = 0;
     private final int MINE = 9;
-    private final int COVERED = 10;
-    private final int MARKED = 10;
     private final int COVERED_MINE = 19; //MINE + COVERED
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
     
@@ -98,8 +95,10 @@ public class Paintboard extends JPanel {
                     if (square > COVERED_MINE) {
                         square = PAINT_MARKED;
                     } else if (square > MINE) {
-                        square = PAINT_COVERED;
-                        uncoverCount++;
+                        if (square != COVERED_MINE) {
+                            uncoverCount++;
+                        } 
+                        square = PAINT_COVERED;                                               
                     }
                 }
                 

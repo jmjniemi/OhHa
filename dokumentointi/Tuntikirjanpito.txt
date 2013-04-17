@@ -44,3 +44,6 @@ Koodia: 2h
 JUnit-testejä: 1h
 Dokumentointia: 1h
 Sekvenssikaavioita ja JavaDoc: 2h
+
+Keskiviikko 17.4.2013
+Koodia: 2h

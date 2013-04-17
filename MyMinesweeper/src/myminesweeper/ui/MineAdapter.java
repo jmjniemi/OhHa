@@ -63,7 +63,6 @@ public class MineAdapter extends MouseAdapter {
             this.minefield = game.getField();
             actions.setMinefield(minefield);
             component.setMinefield(minefield);
-            component.repaint();
         }
 
         if ((cColumn < game.getWidth()) && (cRow < game.getHeight())) {
