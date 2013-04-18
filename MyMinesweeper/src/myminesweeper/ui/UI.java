@@ -54,15 +54,15 @@ public class UI implements Runnable {
  
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);     
         
-        JMenuBar menuBar = new JMenuBar();
-        frame.setJMenuBar(menuBar);
-        
-        JMenu file = new JMenu("File");
-        JMenuItem options = new JMenuItem("Options");
-        
-        file.add(options);
-        
-        menuBar.add(file);
+//        JMenuBar menuBar = new JMenuBar();
+//        frame.setJMenuBar(menuBar);
+//        
+//        JMenu file = new JMenu("File");
+//        JMenuItem options = new JMenuItem("Options");
+//        
+//        file.add(options);
+//        
+//        menuBar.add(file);
         
         luoKomponentit(frame.getContentPane());
         

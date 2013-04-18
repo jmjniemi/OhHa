@@ -47,3 +47,7 @@ Sekvenssikaavioita ja JavaDoc: 2h
 
 Keskiviikko 17.4.2013
 Koodia: 2h
+Koodia: 2h
+
+Torstai 18.4.2013
+Koodia: 1h30min

@@ -12,7 +12,7 @@ public class MyMinesweeper {
      * @param args 
      */
     public static void main(String[] args) {
-        GameSetUp g = new GameSetUp();
+        GameSetup g = new GameSetup();
         g.launch();
     }
     
