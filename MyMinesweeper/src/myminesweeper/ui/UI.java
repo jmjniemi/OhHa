@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import myminesweeper.functionality.Field;
 
@@ -25,6 +26,9 @@ public class UI implements Runnable {
     
     private Field game;
     private JLabel statusbar;
+    private JLabel timebar;
+    private Timer timer;
+    private TimeCounter timeCounter;
     private JFrame frame;
     private Paintboard paintboard;
     private MineAdapter mouse;
@@ -83,10 +87,17 @@ public class UI implements Runnable {
         statusbar = new JLabel("Start Minesweeping!");
         container.add(statusbar, BorderLayout.SOUTH);
         
-        paintboard = new Paintboard(game, statusbar, frame);
+        timebar = new JLabel("0");
+        container.add(timebar, BorderLayout.NORTH);
+        
+        timeCounter = new TimeCounter(timebar);
+        timer = new Timer(1000, timeCounter);
+        timer.start();
+        
+        paintboard = new Paintboard(game, statusbar, frame, timer, timeCounter);
         container.add(paintboard);
         
-        mouse = new MineAdapter(game, statusbar, paintboard);
+        mouse = new MineAdapter(game, statusbar, paintboard, timer, timeCounter);
         frame.addMouseListener(mouse);
     }
     

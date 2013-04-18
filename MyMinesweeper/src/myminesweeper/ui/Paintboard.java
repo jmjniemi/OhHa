@@ -9,7 +9,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import myminesweeper.functionality.Field;
 
 /**
@@ -35,6 +37,9 @@ public class Paintboard extends JPanel {
     private JLabel statusbar;
     JFrame frame;
     
+    private Timer timer;
+    private TimeCounter timeCounter;
+    
     /**
      * Konstruktori tallentaa taulukkoon png-kuvatiedostot eri ruuduista.
      * 
@@ -42,12 +47,15 @@ public class Paintboard extends JPanel {
      * @param statusbar
      * @param frame 
      */
-    public Paintboard(Field game, JLabel statusbar, JFrame frame) {
+    public Paintboard(Field game, JLabel statusbar, JFrame frame, Timer timer, TimeCounter timeCounter) {
         
         this.game = game;
         this.minefield = game.getField();
         this.statusbar = statusbar;
         this.frame = frame;
+        
+        this.timer = timer;
+        this.timeCounter = timeCounter;
         
         images = new Image[13];
         
@@ -110,8 +118,14 @@ public class Paintboard extends JPanel {
         if (uncoverCount == 0 && game.getStatus()) {
             game.setStatus(false);
             statusbar.setText("You won!");
+            timer.stop();
+            
+            int endTime = timeCounter.getTime();
+            JOptionPane.showMessageDialog(null, "Your time: " + endTime);
+            
         } else if (!game.getStatus()) {
             statusbar.setText("You lost...");
+            timer.stop();
         }
         
     }
