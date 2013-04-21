@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import myminesweeper.ScoreHandler;
 import myminesweeper.functionality.Field;
 
 /**
@@ -121,7 +122,22 @@ public class Paintboard extends JPanel {
             timer.stop();
             
             int endTime = timeCounter.getTime();
-            JOptionPane.showMessageDialog(null, "Your time: " + endTime);
+            
+            if (game.scoreable()) {
+                ScoreHandler sh = new ScoreHandler();
+                if (sh.isHighScore(endTime)) {
+                    String name = "";
+                    int b = -1;
+                    while (b < 0) {
+                        name = JOptionPane.showInputDialog("New highscore! Please enter your name");
+                        if (name.length() > 0) {
+                            b++;
+                        }
+                    }
+                    sh.newHighscore(name, endTime);                    
+                }
+            }
+            
             
         } else if (!game.getStatus()) {
             statusbar.setText("You lost...");

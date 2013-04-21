@@ -115,6 +115,9 @@ public class Field {
     public void setStatus(boolean s) {
         this.gameStatus = s;
     }
+    public boolean scoreable() {
+        return this.countScore;
+    }
     public void squareMarked(boolean unmarked) {
         if (unmarked) {
             this.minesLeft--;

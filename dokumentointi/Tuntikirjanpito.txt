@@ -52,3 +52,9 @@ Koodia: 2h
 Torstai 18.4.2013
 Koodia: 1h30min
 Koodia: 2h
+
+Lauantai 20.4.2013
+Koodia: 2h
+
+Sunnuntai 21.4.2013
+Koodia: 3h

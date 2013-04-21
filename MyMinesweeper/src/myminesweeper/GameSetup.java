@@ -25,7 +25,17 @@ public class GameSetup {
             String answer = JOptionPane.showInputDialog("Do you want default settings? (yes/no)");
             if (answer.equals("yes")) {
                 this.game = new Field(new Random());
-                g++;
+                ScoreHandler sh = new ScoreHandler();
+                sh.showCurrent();
+                while (g < 0) {
+                    answer = JOptionPane.showInputDialog(null, "Reset highscore? (yes/no)");
+                    if (answer.equals("yes")) {
+                        sh.reset();
+                        g++;
+                    } else if (answer.equals("no")) {
+                        g++;
+                    }
+                }
             } else if (answer.equals("no")) {
                 defineCustomValues();
                 g++;
