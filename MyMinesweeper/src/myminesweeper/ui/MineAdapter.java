@@ -23,6 +23,7 @@ public class MineAdapter extends MouseAdapter {
     
     private Field game;
     private int[][] minefield;
+    private boolean firstClick;
     private JLabel statusbar;
     private Paintboard component;
     private ClickActions actions;
@@ -39,6 +40,7 @@ public class MineAdapter extends MouseAdapter {
     public MineAdapter(Field game, JLabel statusbar, Paintboard component, Timer timer, TimeCounter timeCounter) {
         this.game = game;
         this.minefield = game.getField();
+        this.firstClick = true;
         this.statusbar = statusbar;
         this.component = component;
         this.actions = new ClickActions(game);
@@ -65,6 +67,7 @@ public class MineAdapter extends MouseAdapter {
             game.createField();
             game.resetMinesLeft();
             game.setStatus(true);
+            this.firstClick = true;
             statusbar.setText("Start Minesweeping!");
             
             timeCounter.resetTime();
@@ -73,6 +76,12 @@ public class MineAdapter extends MouseAdapter {
             this.minefield = game.getField();
             actions.setMinefield(minefield);
             component.setMinefield(minefield);
+        }
+        
+        if (firstClick) {
+            firstClick = false;
+            this.statusbar.setText(Integer.toString(game.getMinesLeft()));
+            game.firstClickCheck(cRow, cColumn);
         }
 
         if ((cColumn < game.getWidth()) && (cRow < game.getHeight())) {

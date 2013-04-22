@@ -188,7 +188,57 @@ public class Field {
             return false;
         }
     }
+    
+    public void firstClickCheck(int y, int x) {
+        if (minefield[y][x] == COVERED_MINE) {
+            fg.changeCount(y-1, x-1, -1);
+            fg.changeCount(y-1, x, -1);
+            fg.changeCount(y-1, x+1, -1);
+            
+            fg.changeCount(y, x-1, -1);
+            fg.changeCount(y, x+1, -1);
+            
+            fg.changeCount(y+1, x-1, -1);
+            fg.changeCount(y+1, x, -1);
+            fg.changeCount(y+1, x+1, -1);
+            
+            changeMineToNumber(y, x);
+        }
+    }
+    
+    protected void changeMineToNumber(int y, int x) {
+        minefield[y][x] = COVERED;
+        
+        minefield[y][x] += getAdjacentMines(y, x);
+    }
 
+    protected int getAdjacentMines(int y, int x) {
+        int adjacentMines = 0;
+        
+        adjacentMines += isMine(y-1, x-1);
+        adjacentMines += isMine(y-1, x);
+        adjacentMines += isMine(y-1, x+1);
+        
+        adjacentMines += isMine(y, x-1);
+        adjacentMines += isMine(y, x+1);
+        
+        adjacentMines += isMine(y+1, x-1);
+        adjacentMines += isMine(y+1, x);
+        adjacentMines += isMine(y+1, x+1);
+        
+        return adjacentMines;
+    }
+    protected int isMine(int y, int x) {
+        try {
+            if (minefield[y][x] == COVERED_MINE) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {}
+        
+        return 0;
+    }
     /**
      * Apumetodi, joka tulostaa merkkiesityksen luodusta miinakentästä. Ei käytetä varsinaisessa pelissä.
      */

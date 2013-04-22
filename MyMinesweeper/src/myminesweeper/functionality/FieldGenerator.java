@@ -88,24 +88,24 @@ public class FieldGenerator {
 
                 //seuraavaksi kasvatetaan asetetun miinan viereisten ruutujen arvoja, jotka kertovat
                 //ympäröivien miinojen määrän. Ympäröiviä ruutuja on 8, paitsi reunoissa. 
-                addCount(y-1, x-1);
-                addCount(y-1, x);
-                addCount(y-1, x+1);
+                changeCount(y-1, x-1, 1);
+                changeCount(y-1, x, 1);
+                changeCount(y-1, x+1, 1);
                 
-                addCount(y,   x-1);
-                addCount(y,   x+1);
+                changeCount(y,   x-1, 1);
+                changeCount(y,   x+1, 1);
                 
-                addCount(y+1, x-1);
-                addCount(y+1, x);
-                addCount(y+1, x+1);
+                changeCount(y+1, x-1, 1);
+                changeCount(y+1, x, 1);
+                changeCount(y+1, x+1, 1);
             }
         }
     }
     
-    protected void addCount(int y, int x) {
+    protected void changeCount(int y, int x, int change) {
         try {
             if (minefield[y][x] != COVERED_MINE) {
-                minefield[y][x] += 1;
+                minefield[y][x] += change;
             }
         } catch (Exception e) { } //jos menee ulos taulukosta, ei tehdä mitään
     }
