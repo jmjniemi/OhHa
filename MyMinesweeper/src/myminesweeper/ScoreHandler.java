@@ -4,6 +4,7 @@
  */
 package myminesweeper;
 
+import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +23,6 @@ public class ScoreHandler {
     private FileWriter fWriter;
     private Scanner scanner;
     private int currentTime;
-    private String currentScore;
 
     public ScoreHandler() {
         this.hiscore = new File("highscore.txt");
@@ -30,13 +30,12 @@ public class ScoreHandler {
         try {
             this.scanner = new Scanner(this.hiscore);
         } catch (Exception e) {
-            e.toString();
+            JOptionPane.showMessageDialog(null, "error");
         }
 
-        String iniName = scanner.next();
         String iniTime = scanner.next();
-
-        this.currentScore = iniName + " " + iniTime;
+        iniTime = scanner.next();
+        
         this.currentTime = Integer.parseInt(iniTime);
     }
 
@@ -47,7 +46,7 @@ public class ScoreHandler {
             this.currentTime = time;
             fWriter.close();
         } catch (Exception e) {
-            e.toString();
+            JOptionPane.showMessageDialog(null, "error");
         }
 
     }
@@ -64,8 +63,8 @@ public class ScoreHandler {
         try {
             scanner = new Scanner(this.hiscore);
             JOptionPane.showMessageDialog(null, scanner.nextLine(), "Current Highscore", JOptionPane.PLAIN_MESSAGE);
-        } catch (Exception e) {
-            e.toString();
+        } catch (FileNotFoundException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "error");
         }
 
     }

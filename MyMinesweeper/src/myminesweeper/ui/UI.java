@@ -68,7 +68,7 @@ public class UI implements Runnable {
 //        
 //        menuBar.add(file);
         
-        luoKomponentit(frame.getContentPane());
+        createComponents(frame.getContentPane());
         
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -83,7 +83,7 @@ public class UI implements Runnable {
      * 
      * @param container 
      */
-    public void luoKomponentit(Container container) {
+    public void createComponents(Container container) {
         statusbar = new JLabel("Start Minesweeping!");
         container.add(statusbar, BorderLayout.SOUTH);
         
