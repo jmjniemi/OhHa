@@ -4,14 +4,12 @@
  */
 package myminesweeper.ui;
 
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import myminesweeper.functionality.Field;
 import myminesweeper.functionality.ClickActions;
+import myminesweeper.functionality.Field;
 
 /**
  *

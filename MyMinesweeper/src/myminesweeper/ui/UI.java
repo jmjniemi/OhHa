@@ -9,9 +9,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import myminesweeper.functionality.Field;
@@ -56,17 +53,7 @@ public class UI implements Runnable {
         
         frame.setPreferredSize(new Dimension(boardWidth, boardHeight));
  
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);     
-        
-//        JMenuBar menuBar = new JMenuBar();
-//        frame.setJMenuBar(menuBar);
-//        
-//        JMenu file = new JMenu("File");
-//        JMenuItem options = new JMenuItem("Options");
-//        
-//        file.add(options);
-//        
-//        menuBar.add(file);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  
         
         createComponents(frame.getContentPane());
         

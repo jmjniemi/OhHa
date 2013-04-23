@@ -1,8 +1,8 @@
 package myminesweeper;
 
-import myminesweeper.functionality.Field;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import myminesweeper.functionality.Field;
 import myminesweeper.ui.UI;
 
 /**
