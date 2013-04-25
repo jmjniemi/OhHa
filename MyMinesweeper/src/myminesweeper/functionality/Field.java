@@ -130,7 +130,7 @@ public class Field {
      * FieldGenerator-olio asettaa miinat kenttään
      */
     public void createField() {
-        this.minefield = fg.createField();
+        this.minefield = fg.createField(this.mines);
     }
     
     
@@ -203,6 +203,10 @@ public class Field {
             fg.changeCount(y+1, x+1, -1);
             
             changeMineToNumber(y, x);
+            
+            fg.deployMines(1);
+            
+            System.out.println("mine clicked");
         }
     }
     

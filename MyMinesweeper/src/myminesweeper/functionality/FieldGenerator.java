@@ -38,7 +38,6 @@ public class FieldGenerator {
         this.minefield = minefield;
         this.height = height;
         this.width = width;
-        this.mines = mines;
         this.random = r;
     }
     /**
@@ -51,13 +50,13 @@ public class FieldGenerator {
      * 
      * @return Palauttaa miinakentän, johon miinat on asetettu
      */
-    public int[][] createField() {
+    public int[][] createField(int mines) {
         
         minefield = new int[height][width];
 
         initialize();
         
-        deployMines();
+        deployMines(mines);
         
         return minefield;
     }
@@ -70,7 +69,7 @@ public class FieldGenerator {
         }
     }
     
-    protected void deployMines() {
+    protected void deployMines(int mines) {
         int usedMines = 0;
         int y;
         int x;        
