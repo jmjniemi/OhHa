@@ -65,3 +65,9 @@ Koodia: 30min
 
 Torstai 25.4.2013
 Koodia 1h
+
+Perjantai 26.4.2013
+JavaDoc: 1h
+
+Lauantai 27.4.2013
+JavaDoc: 2h

@@ -10,13 +10,22 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author Jaakko
+ * Luokka huolehtii ajan laskemisesta.
  */
 public class TimeCounter implements ActionListener {
-    
+    /**
+     * Kulloinenkin aika.
+     */
     private int currentTime;
+    /**
+     * JLabel, jossa aika näkyy.
+     */
     JLabel timebar;
-    
+    /**
+     * Konstruktori asettaa alkuajaksi 0 ja saa viitteen timebariin.
+     * 
+     * @param timebar viite timebariin
+     */
     public TimeCounter(JLabel timebar) {
         this.timebar = timebar;
         this.currentTime = 0;
@@ -25,9 +34,9 @@ public class TimeCounter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (currentTime < 999) {
-            currentTime++;
+            currentTime++;            
+            timebar.setText("" + currentTime);
         }
-        timebar.setText("" + currentTime);
     }
     
     public int getTime() {

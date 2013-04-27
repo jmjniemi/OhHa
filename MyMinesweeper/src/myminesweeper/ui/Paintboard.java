@@ -16,37 +16,58 @@ import myminesweeper.ScoreHandler;
 import myminesweeper.functionality.Field;
 
 /**
- *
- * 
- * 
  * Luokka luo graafisen esityksen miinakentästä.
  */
 public class Paintboard extends JPanel {
-    
+    /**
+     * ruudut ovat numeroarvoja, mutta selkeyden vuoksi käytetään nimettyjä muuttujia
+     */
     private final int MINE = 9;
     private final int COVERED_MINE = 19; //MINE + COVERED
     private final int MARKED_MINE = 29; //COVERED_MINE + MARKED
-    
+    /**
+     * PAINT-muuttujat kertovat, mitä png-kuvaa käytetään.
+     */
     private final int PAINT_MINE = 9;
     private final int PAINT_COVERED = 10;
     private final int PAINT_MARKED = 11;
     private final int PAINT_WRONG = 12;
-    
+    /**
+     * Viite Field-olioon.
+     */
     private Field game;
+    /**
+     * Viite miinakenttä-taulukkoon.
+     */
     private int[][] minefield;
+    /**
+     * Taulukko png-kuvatiedostoista, joista miinakenttä piirretään.
+     */
     private Image[] images;
+    /**
+     * Viite statusbariin.
+     */
     private JLabel statusbar;
+    /**
+     * Viite kehykseen.
+     */
     JFrame frame;
-    
+    /**
+     * Viite timer-olioon
+     */
     private Timer timer;
+    /**
+     * Viite timeCounter-olioon
+     */
     private TimeCounter timeCounter;
     
     /**
-     * Konstruktori tallentaa taulukkoon png-kuvatiedostot eri ruuduista.
+     * Konstruktori asettaa muuttujat ja tallentaa taulukkoon png-kuvatiedostot
+     * eri ruuduista.
      * 
-     * @param game
-     * @param statusbar
-     * @param frame 
+     * @param game Field-olio
+     * @param statusbar statusbar
+     * @param frame frame
      */
     public Paintboard(Field game, JLabel statusbar, JFrame frame, Timer timer, TimeCounter timeCounter) {
         
@@ -64,7 +85,11 @@ public class Paintboard extends JPanel {
             images[i] = (new ImageIcon(this.getClass().getResource((i) + ".png"))).getImage();
         }
     }
-    
+    /**
+     * Resetoi miinakenttä-taulukon.
+     * 
+     * @param mfield uusi taulukko
+     */
     public void setMinefield(int[][] mfield) {
         this.minefield = mfield;
     }

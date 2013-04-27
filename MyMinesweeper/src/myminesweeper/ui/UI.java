@@ -15,19 +15,40 @@ import myminesweeper.functionality.Field;
 
 /**
  *Käyttöliittymä. Luo alueen, jolle ruudut piirretään, ja asettaa sen alle
- *tekstikentän, jossa näkyy jäljelläolevien miinojen määrä
- * 
- * 
+ *tekstikentän, jossa näkyy jäljelläolevien miinojen määrä. Päälle ajanlaskun.
  */
 public class UI implements Runnable {
-    
+    /**
+     * Viite Field-olioon
+     */
     private Field game;
+    /**
+     * Näyttää jäljellläolevien miinojen määrän
+     */
     private JLabel statusbar;
+    /**
+     * Ajanlasku näkyy timebarissa
+     */
     private JLabel timebar;
+    /**
+     * Timer-olio, jota timeConter-olio käyttää ajan laskemiseen.
+     */
     private Timer timer;
+    /**
+     * Huolehtii ajanlaskusta
+     */
     private TimeCounter timeCounter;
+    /**
+     * Kehys.
+     */
     private JFrame frame;
+    /**
+     * Miinakentän piirtämisestä huolehtiva olio.
+     */
     private Paintboard paintboard;
+    /**
+     * Hiiriadapteri.
+     */
     private MineAdapter mouse;
     
     /**
@@ -65,7 +86,7 @@ public class UI implements Runnable {
     /**
      * Käyttöliittymään kuuluu alue, jolle piirtoalusta piirtää graafisen
      * esityksen miinakentästä, tilarivi, jossa on tieto jäljelläolevista
-     * miinoista, sekä hiiriadapteri, jolla vuorovaikutus kentän kanssa
+     * miinoista, timebar, jossa näkyy aika, sekä hiiriadapteri, jolla vuorovaikutus kentän kanssa
      * tapahtuu.
      * 
      * @param container 

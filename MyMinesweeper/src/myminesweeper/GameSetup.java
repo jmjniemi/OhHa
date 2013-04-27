@@ -9,16 +9,24 @@ import myminesweeper.ui.UI;
  *
  * 
  * 
- * Luokka luo uuden pelin ja käyttöliittymän
+ * Luokka kysyy pelaajaalta pelin arvot ja luo uuden pelin ja käyttöliittymän.
  */
 public class GameSetup {
-    
+    /**
+     * Field-olio, joka lähetetään UI-oliolle.
+     */
     private Field game;
+    /**
+     * UI-olio, joka luo käyttöliittymän saamansa Field-olion pohjalta.
+     */
     private UI ui;
     
     public GameSetup() {
     }
-    
+    /**
+     * Metodi selvittää, millaisen pelin pelaaja haluaa ja luo tietojen pohjalta
+     * Field- ja UI-oliot.
+     */
     protected void setup() {
         int g = -1;
         while (g < 0) {
@@ -43,7 +51,9 @@ public class GameSetup {
         }
         ui = new UI(game);
     }
-    
+    /**
+     * Metodi kysyy pelaajalta custom-arvot.
+     */
     protected void defineCustomValues() {
         int customHeight = askValues("Height", 9, 30);
         int customWidth = askValues("Width", 9, 30);
@@ -54,7 +64,15 @@ public class GameSetup {
         this.game = new Field(customHeight, customWidth, customMines, new Random());
         
     }
-    
+    /**
+     * Apumetodi defineCustomValues()-metodille custom-arvojen määrittämiseen.
+     * @see  myminesweeper.GameSetup#defineCustomValues()
+     * 
+     * @param valueType Kysytäänkö height-, width- vai mines-arvoa.
+     * @param minValue Mikä on arvon minimiarvo.
+     * @param maxValue Mikä on arvon maksimiarvo
+     * @return Pelaajan antama arvo parametrille.
+     */
     protected int askValues(String valueType, int minValue, int maxValue) {
         int value = 0;
         int g = -1;
@@ -79,7 +97,7 @@ public class GameSetup {
     }
     
     /**
-     * metodi käynnistää käyttöliittymän
+     * Metodi käynnistää käyttöliittymän.
      */
     public void launch() {
         

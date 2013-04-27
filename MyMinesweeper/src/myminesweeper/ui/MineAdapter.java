@@ -12,15 +12,15 @@ import myminesweeper.functionality.ClickActions;
 import myminesweeper.functionality.Field;
 
 /**
- *
- * 
- * 
  * Luokka hoitaa vuorovaikutuksen käyttäjän ja kentän välillä
  */
 public class MineAdapter extends MouseAdapter {
-    
+
     private Field game;
     private int[][] minefield;
+    /**
+     * Kertoo onko klikkaus ensimmäinen vai ei.
+     */
     private boolean firstClick;
     private JLabel statusbar;
     private Paintboard component;
@@ -30,10 +30,10 @@ public class MineAdapter extends MouseAdapter {
 
     /**
      * Konstruktori saa UI:lta tarvittavat parametrit
-     * 
-     * @param game
-     * @param statusbar
-     * @param component 
+     *
+     * @param game Field-olio
+     * @param statusbar statusbar
+     * @param component Paintboard-olio
      */
     public MineAdapter(Field game, JLabel statusbar, Paintboard component, Timer timer, TimeCounter timeCounter) {
         this.game = game;
@@ -48,9 +48,12 @@ public class MineAdapter extends MouseAdapter {
     }
 
     /**
-     * Metodi 
-     * 
-     * @param e 
+     * Metodi huolehtii ensimmäisen klikkauksen aiheuttamista muutoksista ja
+     * lähettää ClickActions-oliolle jokaisen klikkauksen kohderuudun ja
+     * painetun hiirenpainikkeen. Kutsuu joka klikkauksen jälkeen Paintboardin
+     * repaint-metodia.
+     *
+     * @param e Hiirenklikkauksen tiedot.
      */
     @Override
     public void mousePressed(MouseEvent e) {
@@ -58,44 +61,47 @@ public class MineAdapter extends MouseAdapter {
         int x = e.getX();
         int y = e.getY();
 
-        int cColumn = (x-3) / 20;
-        int cRow = (y-21) / 20-1;
+        int cColumn = (x - 3) / 20;
+        int cRow = (y - 21) / 20 - 1;
 
-        if (!game.getStatus()) {
-            game.createField();
-            game.resetMinesLeft();
-            game.setStatus(true);
-            this.firstClick = true;
-            statusbar.setText("Start Minesweeping!");
-            
-            timeCounter.resetTime();
-            timer.start();
-            
-            this.minefield = game.getField();
-            actions.setMinefield(minefield);
-            component.setMinefield(minefield);
-        }
-        
-        if (firstClick) {
-            firstClick = false;
-            this.statusbar.setText(Integer.toString(game.getMinesLeft()));
-            game.firstClickCheck(cRow, cColumn);
-        }
+        if (game.checkIfInBounds(cRow, cColumn)) {
 
-        if ((cColumn < game.getWidth()) && (cRow < game.getHeight())) {
+            if (!game.getStatus()) {
+                game.createField();
+                game.resetMinesLeft();
+                game.setStatus(true);
+                this.firstClick = true;
+                statusbar.setText("Start Minesweeping!");
 
-            if (e.getButton() == MouseEvent.BUTTON3) {
-                
-                statusbar.setText(actions.rightClick(cRow, cColumn));
-                
-            } else {
-                
-                actions.leftClick(cRow, cColumn);
+                timeCounter.resetTime();
+                timer.start();
+
+                this.minefield = game.getField();
+                actions.setMinefield(minefield);
+                component.setMinefield(minefield);
             }
-            
-            component.repaint();
-            
-            
+
+            if (firstClick) {
+                firstClick = false;
+                this.statusbar.setText(Integer.toString(game.getMinesLeft()));
+                game.firstClickCheck(cRow, cColumn);
+            }
+
+            if ((cColumn < game.getWidth()) && (cRow < game.getHeight())) {
+
+                if (e.getButton() == MouseEvent.BUTTON3) {
+
+                    statusbar.setText(actions.rightClick(cRow, cColumn));
+
+                } else {
+
+                    actions.leftClick(cRow, cColumn);
+                }
+
+                component.repaint();
+
+
+            }
         }
     }
 }
