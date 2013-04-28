@@ -1,0 +1,15 @@
+My Minesweeper
+Rakenteen kuvaus
+
+Taulukko, johon miinakenttä on tallennettu, on Field-luokassa, jossa on myös metodit taulukon muokkaamiseen. Se käyttää
+FieldGenerator-luokkaa miinojen asettamiseen. Ohjelman käynnistyessä GameSetup-luokka kysyy käyttäjältä pelin parametrit
+ja luo niiden pohjalta Field-olion ja käyttöliittymän.
+
+UI-luokka rakentaa käyttöliittymän. Käyttöliittymään kuuluu JPanelin perivä Paintboard-luokka, hiiriadapteri MineAdapter, 
+ajanlaskusta huolehtiva TimeCounter-luokka ja JLabel-statusbarit ajan ja jäljelläolevien miinojen esittämiseen. 
+
+MineAdapter resetoi kaiken aina uuden pelin alkaessa ja lähettää hiirenklikkausten tiedot ClickActions-oliolle. Tämä kutsuu
+tietojen pohjalta Field-luokan miinakenttää muokkaavia metodeja.
+
+Paintboard piirtää miinakentän joka klikkauksen jälkeen. Se myös tietää koska kaikki miinattomat ruudut on paljastettu tai miinaan
+osutaan, eli kun peli päättyy. Voiton seurauksena se luo ScoreHandler-olion, joka tallentaa mahdollisen huipputuloksen.

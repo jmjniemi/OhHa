@@ -62,7 +62,7 @@ public class MineAdapter extends MouseAdapter {
         int y = e.getY();
 
         int cColumn = (x - 3) / 20;
-        int cRow = (y - 21) / 20 - 1;
+        int cRow = (y - 41) / 20;
 
         if (game.checkIfInBounds(cRow, cColumn)) {
 

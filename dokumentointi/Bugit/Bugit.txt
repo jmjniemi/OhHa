@@ -1,4 +1,6 @@
 -Laitoksen Ubuntuilla hiiren koordinaatit eiv‰t pelit‰, eli klikkaus osuu v‰‰r‰‰n ruutuun, omalla Windowsillani koordinaatit ovat tarkat. Vaikuttaa pelattavuuteen.
+***Koordinaatteja voi muokata MineAdapter-luokan riveill‰ 64 ja 65. En kyll‰ valitettavasti tied‰ oikeita koordinaatteja ubuntulle***
+
 -Default-arvoilla voittaessa tulee popup-ikkuna mahdollisesta huipputuloksesta. T‰st‰ seuraa graafinen bugi (ruudukkoon j‰‰ osia popup-ikkunoista),
 joka h‰vi‰‰ seuraavan klikkauksen j‰lkeen. Ei vaikuta pelattavuuteen. (Kuva1)
 -Joskus, jos osuu miinaan, vain osa j‰ljell‰ olevista miinoista tulee n‰kyviin. Ei vaikuta pelattavuuteen. (Kuva2)

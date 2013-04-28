@@ -1,0 +1,118 @@
+title Create minefield
+
+game-Field->fg-FieldGenerator: fg.createMinefield
+
+
+fg-FieldGenerator->fg-FieldGenerator: minefield = new int[][]
+
+fg-FieldGenerator->fg-FieldGenerator: initialize()
+
+loop kaikille taulukon arvoille
+    fg-FieldGenerator->fg-FieldGenerator: minefield[y][x] = COVERED
+end
+
+fg-FieldGenerator->fg-FieldGenerator: deployMines()
+
+loop kaikille miinoille
+    fg-FieldGenerator->fg-FieldGenerator: y & x = random\nminefield[y][x] = COVERED_MINE\nadjacentValues ++
+end
+
+fg-FieldGenerator->game-Field: minefield
+
+
+******
+******
+
+title Right Mouse Button - target covered
+
+mouse-MineAdapter->ca-ClickActions: rightClick(y, x) 
+
+alt target unmarked
+    ca-ClickActions->game-Field: game.mark(y, x)
+
+game-Field->game-Field: minefield[y][x] += 10
+
+ca-ClickActions->game-Field: game.squareMarked(true)
+
+game-Field->game-Field: this.minesLeft--
+
+ca-ClickActions->mouse-MineAdapter: return (Integer.toString(game.getMinesLeft()))
+
+else target marked
+    ca-ClickActions->game-Field: game.unmark(y, x)
+
+game-Field->game-Field: minefield[y][x] -= 10
+
+ca-ClickActions->game-Field: game.squareMarked(false)
+
+game-Field->game-Field: this.minesLeft++
+end
+
+ca-ClickActions->mouse-MineAdapter: return (Integer.toString(game.getMinesLeft()))
+
+mouse-MineAdapter->mouse-MineAdapter: statusbar.setText(return value)
+
+
+******
+******
+
+title Left Mouse Button - target covered & unmarked
+
+mouse-MineAdapter->ca-ClickActions: leftClick(y, x)
+
+ca-ClickActions->game-Field: game.uncover(y, x)
+
+game-Field->game-Field: minefield[y][x] -= 10
+
+opt jos tyhja ruutu, kaikille ymparoiville, paitsi miinoille
+    game-Field->game-Field: uncover(y, x)
+end
+
+
+opt jos miina
+    ca-ClickActions->game-Field: game.setStatus(false)
+end
+******
+******
+
+title Left Mouse Button - target uncovered
+
+mouse-MineAdapter->ca-ClickActions: leftClick(y, x)
+
+ca-ClickActions->game-Field: game.uncover(y, x)
+
+ca-ClickActions->ca-ClickActions: massClick(y, x)
+
+loop kaikille ymparoiville, paitsi merkityille miinoille
+    ca-ClickActions->game-Field: game.uncover(y, x)
+end
+
+******
+******
+title New Highscore
+
+pb-Paintboard->game-Field: game.scoreable()
+
+game-Field->pb-Paintboard: true
+
+pb-Paintboard->sh-ScoreHandler: sh = new ScoreHandler()
+
+sh-ScoreHandler->sh-ScoreHandler: File hiscore = new File("highscore.txt")
+
+pb-Paintboard->sh-ScoreHandler: sh.isHighScore(endTime)
+
+
+sh-ScoreHandler->pb-Paintboard: true
+
+pb-Paintboard->pb-Paintboard: String name = input
+
+pb-Paintboard->sh-ScoreHandler: sh.newHighscore(name, endTime)
+
+sh-ScoreHandler->fWriter-FileWriter: fWriter = new FileWriter(hiscore)
+
+sh-ScoreHandler->fWriter-FileWriter: fWriter.write(name + ": " + endTime)
+
+sh-ScoreHandler->fWriter-FileWriter: fWriter.close();
+
+end
+
