@@ -1,0 +1,17 @@
+My Minesweeper
+Testausdokumentaatio
+
+Ohjelman testaus keskittyy miinakenttä-taulukon luomiseen ja siihen tapahtuviin muutoksiin. Taulukon parametrit - korkeus, leveys ja miinamäärä - testataan
+raja-arvoilla, negatiivisilla ja suurilla luvuilla. 
+
+Miinojen asettamisen hoitava FieldGenerator-olio käyttää Random-oliota miinojen asettamiseen. Testauksessa käytin omaa MyRandom-oliota, joka "arpoo" aina
+edellistä lukua yhtä suuremman luvun. Näin testattava miinakenttä on aina samanlainen. Miinojen asettaminen ja ympäröiviin ruutuihin vaikutus testataan monelta
+kantilta.
+
+Field olion miinakenttään vaikuttavat metodit uncover, mark ja unmark testataan ja yritetään simuloida virheitä, joita pelaaja saattaa tehdä. Päällekäistä testaamista
+on ClickActions-luokan testeissä
+
+Myös TimeCounter-luokka testataan kevyesti.
+
+Testaamiseen olisi voinut keskittyä enemmän ja tehdä testeistä selkeämpiä. Aikaa oli kuitenkin rajallisesti ja halusin käyttää sen pääasiassa ohjelmakoodin 
+kirjoittamiseen. 

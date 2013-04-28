@@ -49,16 +49,20 @@ public class FieldGeneratorTest {
     // @Test
     // public void hello() {}
     @Test
-    public void testAddCount() {
+    public void testChangeCount() {
         
-        testFG.changeCount(0, 0);
+        testFG.changeCount(0, 0, 1);
         assertEquals(19, minefield[0][0]);
         
-        testFG.changeCount(0, 1);
-        testFG.changeCount(0, 1);
-        testFG.changeCount(0, 1);
+        testFG.changeCount(0, 1, 1);
+        testFG.changeCount(0, 1, 1);
+        testFG.changeCount(0, 1, 1);
         
         assertEquals(14, minefield[0][1]);
+        
+        testFG.changeCount(0, 1, -1);
+        
+        assertEquals(13, minefield[0][1]);
     }
     @Test
     public void testInitialize() {

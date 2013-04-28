@@ -56,53 +56,53 @@ public class FieldTest {
     
     @Test
     public void testHeight() {        
-        assertEquals(16, testField.getHeight());
+        assertEquals("Default-korkeus väärä", 16, testField.getHeight());
         
         Field a = new Field(8, 10, 10, random);
-        assertEquals(9, a.getHeight());
+        assertEquals("Korkeuden minimi ei toimi", 9, a.getHeight());
         
         Field b = new Field(-10, 10, 10, random);
-        assertEquals(9, b.getHeight());
+        assertEquals("Negatiivinen korkeus", 9, b.getHeight());
         
         Field c = new Field(31, 10, 10, random);
-        assertEquals(30, c.getHeight());
+        assertEquals("Korkeuden maksimi ei toimi", 30, c.getHeight());
         
         Field d = new Field(234234, 10, 10, random);
-        assertEquals(30, d.getHeight());
+        assertEquals("Suuret luvut sekoittavat korkeuden", 30, d.getHeight());
     }
     
     @Test
     public void testWidth() {        
-        assertEquals(30, testField.getWidth());
+        assertEquals("Default-korkeus väärä", 30, testField.getWidth());
         
         Field a = new Field(7, 8, 10, random);
-        assertEquals(9, a.getWidth());
+        assertEquals("Leveyden minimi ei toimi", 9, a.getWidth());
         
         Field b = new Field(10, -10, 1233, random);
-        assertEquals(9, b.getWidth());
+        assertEquals("Negatiivinen leveys", 9, b.getWidth());
         
         Field c = new Field(10, 31, 7, random);
-        assertEquals(30, c.getWidth());
+        assertEquals("Leveyden maksimi ei toimi", 30, c.getWidth());
         
         Field d = new Field(10, 345343, 10, random);
-        assertEquals(30, d.getWidth());
+        assertEquals("Suuret luvut sekoittavat leveyden", 30, d.getWidth());
     }
     
     @Test
     public void testMines() {        
-        assertEquals(99, testField.getMines());
+        assertEquals("Default-miinamäärä väärä", 99, testField.getMines());
         
         Field a = new Field(10, 10, 9, random);
-        assertEquals(10, a.getMines());
+        assertEquals("Miinojen minimi ei toimi", 10, a.getMines());
         
         Field b = new Field(10, 10, -10, random);
-        assertEquals(10, b.getMines());
+        assertEquals("Negatiivinen miinamäärä", 10, b.getMines());
         
         Field c = new Field(10, 10, 51, random);
-        assertEquals(50, c.getMines());
+        assertEquals("Miinojen maksimi ei toimi", 50, c.getMines());
         
         Field d = new Field(10, 10, 3452, random);
-        assertEquals(50, d.getMines());
+        assertEquals("Suuret luvut sekoittavat miinamäärän", 50, d.getMines());
     }
     @Test
     public void coveredBeginning() { //testaa, että alussa kaikki ruudut on peitetty        
@@ -116,51 +116,50 @@ public class FieldTest {
                 }
             }
         }
-        assertEquals(false, uncovered);
+        assertEquals("Alussa paljastettuja ruutuja", false, uncovered);
     }
     
     @Test
     public void testCounters() {
         int[][] f = hardField.getField();
         
-        assertEquals(19, f[0][1]);
+        assertEquals("Miinan asettaminen ei toimi", 19, f[0][1]);
         
-        assertEquals(11, f[0][0]);
+        assertEquals("Miinojen asettaminen ei muuta ympäröiviä arvoja", 11, f[0][0]);
         
-        assertEquals(12, f[1][2]);
+        assertEquals("Miinojen asettaminen ei muuta ympäröiviä arvoja", 12, f[1][2]);
     }
     
     @Test
     public void testSquareMarkedMethod() {
-        assertEquals(99, testField.getMinesLeft());
+        assertEquals("Jäljelläolevien miinojen määrä alussa väärä", 99, testField.getMinesLeft());
         
         testField.squareMarked(true);
         
-        assertEquals(98, testField.getMinesLeft());
+        assertEquals("Jäljelläolevien miinojen päivitys ei toimi", 98, testField.getMinesLeft());
         
         testField.squareMarked(false);
         
-        assertEquals(99, testField.getMinesLeft());
+        assertEquals("Jäljelläolevien miinojen päivitys takaisinpäin ei toimi", 99, testField.getMinesLeft());
     }
     
     @Test
     public void testUncover() {        
         int[][] f = hardField.getField();
         
-        assertEquals(11, f[0][0]);        
+        assertEquals("Alkuarvo ruudulle väärä", 11, f[0][0]);        
         hardField.uncover(0, 0);        
-        assertEquals(1, f[0][0]);        
+        assertEquals("Miinattoman ruudun paljastaminen ei toimi", 1, f[0][0]);        
         hardField.uncover(0, 0);        
-        assertEquals(1, f[0][0]);
+        assertEquals("Miinattoman ruudun paljastaminen uudestaan sekoittaa", 1, f[0][0]);
         
-        assertEquals(19, f[0][1]);        
+        assertEquals("Alkuarvo miinalle väärä", 19, f[0][1]);        
         hardField.uncover(0, 1);        
-        assertEquals(9, f[0][1]);
+        assertEquals("Miinan paljastaminen ei toimi", 9, f[0][1]);
         
         hardField.mark(0, 2);
-        assertEquals(21, f[0][2]);
         hardField.uncover(0, 2);
-        assertEquals(21, f[0][2]);
+        assertEquals("Merkityn ruudun voi paljastaa", 21, f[0][2]);
     }
     
     @Test
@@ -168,28 +167,28 @@ public class FieldTest {
         int[][] f = hardField.getField();
         
         //Empty square
-        assertEquals(10, f[0][3]);
+        assertEquals("Tyhän ruudun alkuarvo väärä", 10, f[0][3]);
         hardField.mark(0, 3);
-        assertEquals(20, f[0][3]);
+        assertEquals("Tyhjän ruudun merkitseminen ei toimi", 20, f[0][3]);
         hardField.mark(0, 3);
-        assertEquals(20, f[0][3]);
+        assertEquals("Merkityn tyhjän ruudun voi merkitä uudelleen", 20, f[0][3]);
         
         hardField.unmark(0, 3);
-        assertEquals(10, f[0][3]);
+        assertEquals("Merkittyn tyhjän ruudun merkintää ei voi poistaa", 10, f[0][3]);
         hardField.unmark(0, 3);
-        assertEquals(10, f[0][3]);
+        assertEquals("Merkkaamattoman tyhjän ruudun merkinnän poiston yritys muuttaa arvoa", 10, f[0][3]);
         
         //Mine square
-        assertEquals(19, f[0][1]);
+        assertEquals("Miinaruudun alkuarvo väärä", 19, f[0][1]);
         hardField.mark(0, 1);
-        assertEquals(29, f[0][1]);
+        assertEquals("Miinaruudun merkitseminen ei toimi", 29, f[0][1]);
         hardField.mark(0, 1);
-        assertEquals(29, f[0][1]);
+        assertEquals("Merkityn miinaruudun voi merkitä uudelleen", 29, f[0][1]);
         
         hardField.unmark(0, 1);
-        assertEquals(19, f[0][1]);
+        assertEquals("Merkittyn miinaruudun merkintää ei voi poistaa", 19, f[0][1]);
         hardField.unmark(0, 1);
-        assertEquals(19, f[0][1]);
+        assertEquals("Merkkaamattoman miinaruudun merkinnän poiston yritys muuttaa arvoa", 19, f[0][1]);
     }
     
     @Test
@@ -221,7 +220,7 @@ public class FieldTest {
         baos.flush();
         String whatWasPrinted = new String(baos.toByteArray());
         
-        assertEquals(drawn, whatWasPrinted);
+        assertEquals("Miinakentän testitulostus ei toimi", drawn, whatWasPrinted);
     }
     
     // TODO add test methods here.

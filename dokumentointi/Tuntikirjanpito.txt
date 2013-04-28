@@ -65,9 +65,17 @@ Koodia: 30min
 
 Torstai 25.4.2013
 Koodia 1h
+Bugien dokumentointi: 1h
 
 Perjantai 26.4.2013
 JavaDoc: 1h
 
 Lauantai 27.4.2013
 JavaDoc: 2h
+
+Sunnuntai 28.4.2013
+Sekvenssikaavio: 30min
+Luokkakaavio: 10min
+Muu dokumentointi: 1h
+JUnit testit: 3h
+Pelin testaaminen manuaalisesti: 30min

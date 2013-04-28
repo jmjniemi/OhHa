@@ -58,21 +58,21 @@ public class ClickActionsTest {
         
         text = ca.rightClick(0, 0);
         
-        assertEquals(21, f[0][0]);
-        assertEquals("9", text);
+        assertEquals("RightClick ei toimi miinattomaan ruutuun", 21, f[0][0]);
+        assertEquals("Statusbar ei päivity", "9", text);
         
         text = ca.rightClick(0, 0);
         
-        assertEquals(11, f[0][0]);
-        assertEquals("10", text);
+        assertEquals("RightClick uudestaan ei toimi miinattomaan ruutuun", 11, f[0][0]);
+        assertEquals("Statusbar ei päivity takaisinpäin", "10", text);
         
         text = ca.rightClick(0, 1);
         
-        assertEquals(29, f[0][1]);
-        assertEquals("9", text);
+        assertEquals("RightClick ei toimi miinaruutuun", 29, f[0][1]);
+        assertEquals("Statusbar ei päivity", "9", text);
         
         text = ca.rightClick(-123, 3453);
-        assertEquals("9", text);
+        assertEquals("Statusbar päivittyy vikaklikkauksilla", "9", text);
     }
     
     @Test
@@ -84,12 +84,12 @@ public class ClickActionsTest {
             text = ca.rightClick(i, 0);
         }
         
-        assertEquals("0", text);
+        assertEquals("Statusbar ei päivity", "0", text);
         
         text = ca.rightClick(1, 1);
         
-        assertEquals(0, hardField.getMinesLeft());
-        assertEquals("No marks left", text);
+        assertEquals("Merkityt miinat menevät negat. puolelle", 0, hardField.getMinesLeft());
+        assertEquals("Statusbar ei huomioi merkkausten loppumista", "No marks left", text);
     }
     
     @Test
@@ -97,32 +97,30 @@ public class ClickActionsTest {
         int[][] f = hardField.getField();
         
         ca.leftClick(0, 0);
-        assertEquals(1, f[0][0]);
+        assertEquals("Miinattoman ruudun klikkaus ei toimi", 1, f[0][0]);
         
         ca.rightClick(0, 5);
-        assertEquals(20, f[0][5]);
         ca.leftClick(0, 5);
-        assertEquals(20, f[0][5]);
+        assertEquals("Merkittyä ruutua pystyy klikkaamaan", 20, f[0][5]);
         
         ca.leftClick(0, 1);
-        assertEquals(9, f[0][1]);
-        assertEquals(false, hardField.getStatus());
+        assertEquals("Miinaruutua ei pysty klikkaamaan", 9, f[0][1]);
+        assertEquals("Pelin status ei päivity", false, hardField.getStatus());
     }
     @Test
     public void testLeftClick2() {
         int[][] f = hardField.getField();
         
         ca.leftClick(0, 0);
-        assertEquals(1, f[0][0]);
         
         ca.leftClick(0, 0);
-        assertEquals(19, f[0][1]);
-        assertEquals(11, f[1][0]);
+        assertEquals("MassClick ei toimi", 19, f[0][1]);
+        assertEquals("MassClick ei toimi", 11, f[1][0]);
         
         ca.rightClick(0, 1);
         ca.leftClick(0, 0);
         ca.leftClick(0, 0);
-        assertEquals(1, f[1][0]);
+        assertEquals("Uusi klikkaus muuttaa arvoa", 1, f[1][0]);
     }
     
     @Test
@@ -133,7 +131,7 @@ public class ClickActionsTest {
         ca.rightClick(2, 3);
         
         int mines = ca.countAdjacentMines(1, 2);
-        assertEquals(2, mines);
+        assertEquals("Viereisten miinojen laskeminen ei toimi", 2, mines);
         
         ca.rightClick(0, 2);
         ca.rightClick(0, 3);
@@ -143,6 +141,6 @@ public class ClickActionsTest {
         ca.rightClick(2, 2);
         
         mines = ca.countAdjacentMines(1, 2);
-        assertEquals(8, mines);
+        assertEquals("Viereisten miinojen laskeminen ei yllä 8 asti", 8, mines);
     }
 }
